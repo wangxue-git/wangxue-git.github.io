@@ -196,7 +196,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -209,7 +209,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -246,6 +246,85 @@
 
         <div class="content index posts-expand">
           
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/2020081701_mongo_tools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="崔航">
+      <meta itemprop="description" content="崔航的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="崔航的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/17/2020081701_mongo_tools/" class="post-title-link" itemprop="url">mongoBD导入导出数据库命令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-17 09:50:00 / 修改时间：09:48:29" itemprop="dateCreated datePublished" datetime="2020-08-17T09:50:00+08:00">2020-08-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9A%84%E2%80%9C%E6%9C%AF%E2%80%9D/" itemprop="url" rel="index"><span itemprop="name">技术的“术”</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>&emsp;&emsp;MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。在使用过程中如果有疑问，请查阅MongoDB的<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">官方文档</a>。大多数错误都是操作不当导致，查阅文档即可解决。</p>
+<p><strong>&emsp;&emsp;然后执行导出命令，Windows系统内，要先cd到mongoBD的bin目录下，再输入命令</strong><br><strong>&emsp;&emsp;值得一提的是，从MongoDB 4.4开始，<a target="_blank" rel="noopener" href="https://docs.mongodb.com/database-tools/mongoimport/#bin.mongoimport">mongoimport</a>等工具已经和MongoDB Server分开发布，并使用其自己的版本控制（初始版本为）100.0.0。所以，在Windows平台内使用，必须单独下载并安装<a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/database-tools">MongoDB数据库工具包</a></strong></p>
+<h2 id="导出集合操作"><a href="#导出集合操作" class="headerlink" title="导出集合操作"></a>导出集合操作</h2><p>&emsp;&emsp;导出shangcheng数据库内的shop集合/表为shop.json文件，并保存到bin目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoexport -d shangcheng -c shop  -o shop.json</span><br></pre></td></tr></table></figure>
+<h2 id="导入集合操作"><a href="#导入集合操作" class="headerlink" title="导入集合操作"></a>导入集合操作</h2><p>&emsp;&emsp;将bin目录下的shop.json文件导入到shangcheng数据库的shop集合/表，没有shop集合/表时会自动创建</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoimport -d shangcheng -c shop --file shop.json</span><br></pre></td></tr></table></figure>
+<h2 id="一键导出所有数据库（备份）"><a href="#一键导出所有数据库（备份）" class="headerlink" title="一键导出所有数据库（备份）"></a>一键导出所有数据库（备份）</h2><p>&emsp;&emsp;连接到在端口27017上运行的本地MongoDB实例并使用默认设置导出内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodump</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;要指定MongoDB实例的主机和/或端口，请查阅<a target="_blank" rel="noopener" href="https://docs.mongodb.com/database-tools/mongodump/">官方文档</a></p>
+<h2 id="一键导入所有数据库（恢复）"><a href="#一键导入所有数据库（恢复）" class="headerlink" title="一键导入所有数据库（恢复）"></a>一键导入所有数据库（恢复）</h2><p><strong>&emsp;&emsp;一键导入所有数据库操作，需要保证备份的数据库文件已经提前复制到mongoBD的bin目录下的dump文件夹内，再输入命令</strong><br>&emsp;&emsp;从dump目录还原到在端口27017上运行的本地MongoDB实例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore  dump/</span><br></pre></td></tr></table></figure>
+<p><strong>&emsp;&emsp;mongorestore仅执行插入操作，不执行更新。也就是说，如果将文档还原到现有数据库，并且现有数据库内有文档的_id与要还原的文档_id相同时， mongorestore不会覆盖这些文档。</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
