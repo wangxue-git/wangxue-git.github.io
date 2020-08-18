@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="&amp;emsp;&amp;emsp;很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道CPU是什么）的人，明白进程和线程到底是什么，到底有什么关系。 进程的官方定义？&amp;emsp;&amp;emsp;维基百科：进程（英语：process），是指计算机中已运行的程序。&amp;emsp;&amp;emsp;百度百科：进程，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程和线程到底是什么关系">
+<meta property="og:url" content="http://yoursite.com/2020/08/18/2020081801_process_thread/index.html">
+<meta property="og:site_name" content="崔航的博客">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道CPU是什么）的人，明白进程和线程到底是什么，到底有什么关系。 进程的官方定义？&amp;emsp;&amp;emsp;维基百科：进程（英语：process），是指计算机中已运行的程序。&amp;emsp;&amp;emsp;百度百科：进程，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/用户线程.png">
+<meta property="og:image" content="http://yoursite.com/images/内核线程.png">
+<meta property="og:image" content="http://yoursite.com/images/轻量级进程.png">
+<meta property="article:published_time" content="2020-08-18T08:26:00.000Z">
+<meta property="article:modified_time" content="2020-08-18T16:53:29.322Z">
+<meta property="article:author" content="崔航">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/用户线程.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/18/2020081801_process_thread/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>进程和线程到底是什么关系 | 崔航的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">崔航的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">编程不停 学习不止 互联网永不眠</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%AE%98%E6%96%B9%E5%AE%9A%E4%B9%89%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">进程的官方定义？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%98%E6%96%B9%E5%AE%9A%E4%B9%89%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">线程的官方定义？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%EF%BC%8C%E7%BA%BF%E7%A8%8B%E7%9A%84%E9%80%9A%E4%BF%97%E8%A7%A3%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">进程，线程的通俗解释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">线程的三种实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="崔航"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">崔航</p>
+  <div class="site-description" itemprop="description">崔航的博客，分享技术有关的内容</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/cuihanggit" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;cuihanggit" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/18/2020081801_process_thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="崔航">
+      <meta itemprop="description" content="崔航的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="崔航的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          进程和线程到底是什么关系
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-18 16:26:00" itemprop="dateCreated datePublished" datetime="2020-08-18T16:26:00+08:00">2020-08-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-19 00:53:29" itemprop="dateModified" datetime="2020-08-19T00:53:29+08:00">2020-08-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9A%84%E2%80%9C%E9%81%93%E2%80%9D/" itemprop="url" rel="index"><span itemprop="name">技术的“道”</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>&emsp;&emsp;很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道CPU是什么）的人，明白进程和线程到底是什么，到底有什么关系。</p>
+<h2 id="进程的官方定义？"><a href="#进程的官方定义？" class="headerlink" title="进程的官方定义？"></a>进程的官方定义？</h2><p>&emsp;&emsp;维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B">进程</a>（英语：process），是指计算机中已运行的程序。<br>&emsp;&emsp;百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9B%E7%A8%8B/382503">进程</a>，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。</p>
+<h2 id="线程的官方定义？"><a href="#线程的官方定义？" class="headerlink" title="线程的官方定义？"></a>线程的官方定义？</h2><p>&emsp;&emsp;维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。<br>&emsp;&emsp;百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。</p>
+<p><strong>&emsp;&emsp;小结一下，仅看官方定义，你一定还是一头雾水，不明白进程和线程到底是什么。但是，官方的定义是非常重要的。学习一个新概念之前，一定要先看官方定义。等你学完这个概念，理解了之后，再回头看官方的定义，你就会发现官方的概念是简洁而准确的。</strong></p>
+<h2 id="进程，线程的通俗解释"><a href="#进程，线程的通俗解释" class="headerlink" title="进程，线程的通俗解释"></a>进程，线程的通俗解释</h2><p>&emsp;&emsp;进程比较好理解，就是程序一运行，我们就可以说程序创建了一个进程（至少一个，多进程不在本篇的讨论范围之内）。当程序运行结束，该进程就会被销毁。所以我们也可以说，程序是永久存在，进程只是暂时存在。<br>&emsp;&emsp;进程的英文单词是process，process还有一个意思，就是处理。计算机是一个新事务，在进程的概念出现之前，process这个单词就已经存在了，那么为什么要把进程命名为处理呢？<br>&emsp;&emsp;这就和进程的本质有关了，程序每次的运行，本质上就是发出些指令，需要CPU来执行，站在CPU的角度来看，可不就是在处理吗，处理程序发出的指令。所以把进程命名为process，是非常形象的，也能够帮助接触到的人理解进程的本质。</p>
+<p><strong>&emsp;&emsp;对进程这个概念的理解过程，也能够体现阅读英文文档的重要性，尤其是计算机领域。计算中很多概念都是来自英文世界，如果只看中文文档，很多概念是意译。就是说翻译者是根据自己的理解，然后给翻译成中文，在很多场景下缺少了英文描述的准确性，人为增加了接触者的理解难度。</strong></p>
+<p><strong>&emsp;&emsp;对计算机从业者来讲，学会阅读英文文档，不仅可以让你学习到最新的技术，更能帮助你准确理解概念，降低学习难度。</strong><br>&emsp;&emsp;我们知道，CPU的计算资源是独占性的，每次只能处理一个任务（此处为了理解方便，只考虑单核CPU的情况，多核CPU可以理解为多个CPU）。那么，如果进程内的一个任务阻塞了，其他任务不就全阻塞了吗？如果按照这样的方式设计，计算机的运行效率就会特别低，也没有充分利用好CPU的硬件资源。<br>&emsp;&emsp;为了提高计算机的运行效率，充分利用好硬件资源，线程的概念便孕育而生。把一个进程内要处理的任务细分，以任务为单位发送给CPU，CPU以每个细分好的任务为单位来处理，如果一个任务阻塞了（比如等待输入），CPU就去处理其他任务，直到原来的任务有响应了，CPU才会再转过头来处理之前的任务（CPU的实际过程调度过程会更复杂，任务还会有优先级之分）。这里的每个小任务，就是指线程了。<br>&emsp;&emsp;由此，我们可以知道，线程是为了充分利用好CPU而从一个进程内分出来的。也就是说，<strong>一个线程必从属于某个进程；一个进程可以有多个线程。</strong></p>
+<h2 id="线程的三种实现方式"><a href="#线程的三种实现方式" class="headerlink" title="线程的三种实现方式"></a>线程的三种实现方式</h2><p>&emsp;&emsp;我们知道，先有了进程，然后为了加快处理速度，更好地利用CPU资源，才有了线程。刚开始时，用户有并发处理的需要，但是操作系统并不支持多线程，所以只能由软件工程师利用函数库，在代码里面手动创建线程，然后再以线程为单位，传给CPU,提高程序的处理。这种由用户自己创建线程的方式，就叫做<strong>用户线程（User Thread）。</strong></p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/用户线程.png"
+    >
+    <div style="color: #999;">用户线程</div>
+</center>
+
+<p>&emsp;&emsp;随着用户线程的普及，各个操作系统(Windows,Solaris,Linux)内核也逐渐支持了多线程。从此用户不需要再在代码里面手动创建线程，操作系统会自动将进程处理成多线程的执行，实现并行操作。这种由操作系统内核自动创建线程的方式，就叫做<strong>内核线程（Kernel Thread）。</strong></p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/内核线程.png"
+    >
+    <div style="color: #999;">内核线程</div>
+</center>
+
+<p>&emsp;&emsp;在内核线程实现后，有操作系统(Solaris,Linux)为了能够更高效的运行，使用了<strong>轻量级进程（Light-weight process）</strong>方案。所谓轻量级进程，首先在操作系统内核中支持用户线程，并且一个进程可以有多个轻量级进程/轻权进程，每个轻权进程再由一个单独的内核线程来支持。但是，由于这种机制过于复杂，在Solaris的实际实践中并没有发挥出想象中的优势，所以Solaris就又退回了内核线程方案。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/轻量级进程.png"
+    >
+    <div style="color: #999;">轻量级进程</div>
+</center>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>程序运行时，会至少创建一个进程，进程又会创建从属的线程。不同的进程间相互隔离，同一个进程内的所有线程共享内存，其中一个线程崩溃，则该进程内的线程全部奔溃。一个线程必从属于某个进程；一个进程可以有多个线程。</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"># 操作系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/17/2020081702_nginx_config/" rel="prev" title="Nginx作为静态资源服务器时的配置">
+      <i class="fa fa-chevron-left"></i> Nginx作为静态资源服务器时的配置
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">崔航</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
