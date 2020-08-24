@@ -196,20 +196,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -250,6 +250,75 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/24/2020082401_chinese_standard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="崔航">
+      <meta itemprop="description" content="崔航的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="崔航的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/24/2020082401_chinese_standard/" class="post-title-link" itemprop="url">中文技术文档的写作规范</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-24 13:13:00 / 修改时间：13:33:28" itemprop="dateCreated datePublished" datetime="2020-08-24T13:13:00+08:00">2020-08-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A0%87%E5%87%86%E5%92%8C%E8%A7%84%E8%8C%83/" itemprop="url" rel="index"><span itemprop="name">标准和规范</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文档直接遵循阮一峰的<a target="_blank" rel="noopener" href="https://github.com/ruanyf/document-style-guide">《中文技术文档的写作规范》</a>，且博客内其他文章已按照本规范进行修改。</p>
+<p>规范内容可直接访问源地址，不再赘述。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/18/2020081801_process_thread/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -283,7 +352,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-19 00:53:29" itemprop="dateModified" datetime="2020-08-19T00:53:29+08:00">2020-08-19</time>
+                <time title="修改时间：2020-08-24 14:03:46" itemprop="dateModified" datetime="2020-08-24T14:03:46+08:00">2020-08-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -304,36 +373,40 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>&emsp;&emsp;很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道CPU是什么）的人，明白进程和线程到底是什么，到底有什么关系。</p>
-<h2 id="进程的官方定义？"><a href="#进程的官方定义？" class="headerlink" title="进程的官方定义？"></a>进程的官方定义？</h2><p>&emsp;&emsp;维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B">进程</a>（英语：process），是指计算机中已运行的程序。<br>&emsp;&emsp;百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9B%E7%A8%8B/382503">进程</a>，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。</p>
-<h2 id="线程的官方定义？"><a href="#线程的官方定义？" class="headerlink" title="线程的官方定义？"></a>线程的官方定义？</h2><p>&emsp;&emsp;维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。<br>&emsp;&emsp;百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。</p>
-<p><strong>&emsp;&emsp;小结一下，仅看官方定义，你一定还是一头雾水，不明白进程和线程到底是什么。但是，官方的定义是非常重要的。学习一个新概念之前，一定要先看官方定义。等你学完这个概念，理解了之后，再回头看官方的定义，你就会发现官方的概念是简洁而准确的。</strong></p>
-<h2 id="进程，线程的通俗解释"><a href="#进程，线程的通俗解释" class="headerlink" title="进程，线程的通俗解释"></a>进程，线程的通俗解释</h2><p>&emsp;&emsp;进程比较好理解，就是程序一运行，我们就可以说程序创建了一个进程（至少一个，多进程不在本篇的讨论范围之内）。当程序运行结束，该进程就会被销毁。所以我们也可以说，程序是永久存在，进程只是暂时存在。<br>&emsp;&emsp;进程的英文单词是process，process还有一个意思，就是处理。计算机是一个新事务，在进程的概念出现之前，process这个单词就已经存在了，那么为什么要把进程命名为处理呢？<br>&emsp;&emsp;这就和进程的本质有关了，程序每次的运行，本质上就是发出些指令，需要CPU来执行，站在CPU的角度来看，可不就是在处理吗，处理程序发出的指令。所以把进程命名为process，是非常形象的，也能够帮助接触到的人理解进程的本质。</p>
-<p><strong>&emsp;&emsp;对进程这个概念的理解过程，也能够体现阅读英文文档的重要性，尤其是计算机领域。计算中很多概念都是来自英文世界，如果只看中文文档，很多概念是意译。就是说翻译者是根据自己的理解，然后给翻译成中文，在很多场景下缺少了英文描述的准确性，人为增加了接触者的理解难度。</strong></p>
-<p><strong>&emsp;&emsp;对计算机从业者来讲，学会阅读英文文档，不仅可以让你学习到最新的技术，更能帮助你准确理解概念，降低学习难度。</strong><br>&emsp;&emsp;我们知道，CPU的计算资源是独占性的，每次只能处理一个任务（此处为了理解方便，只考虑单核CPU的情况，多核CPU可以理解为多个CPU）。那么，如果进程内的一个任务阻塞了，其他任务不就全阻塞了吗？如果按照这样的方式设计，计算机的运行效率就会特别低，也没有充分利用好CPU的硬件资源。<br>&emsp;&emsp;为了提高计算机的运行效率，充分利用好硬件资源，线程的概念便孕育而生。把一个进程内要处理的任务细分，以任务为单位发送给CPU，CPU以每个细分好的任务为单位来处理，如果一个任务阻塞了（比如等待输入），CPU就去处理其他任务，直到原来的任务有响应了，CPU才会再转过头来处理之前的任务（CPU的实际过程调度过程会更复杂，任务还会有优先级之分）。这里的每个小任务，就是指线程了。<br>&emsp;&emsp;由此，我们可以知道，线程是为了充分利用好CPU而从一个进程内分出来的。也就是说，<strong>一个线程必从属于某个进程；一个进程可以有多个线程。</strong></p>
-<h2 id="线程的三种实现方式"><a href="#线程的三种实现方式" class="headerlink" title="线程的三种实现方式"></a>线程的三种实现方式</h2><p>&emsp;&emsp;我们知道，先有了进程，然后为了加快处理速度，更好地利用CPU资源，才有了线程。刚开始时，用户有并发处理的需要，但是操作系统并不支持多线程，所以只能由软件工程师利用函数库，在代码里面手动创建线程，然后再以线程为单位，传给CPU,提高程序的处理。这种由用户自己创建线程的方式，就叫做<strong>用户线程（User Thread）。</strong></p>
+          <p>很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道 CPU 是什么）的人，明白进程和线程到底是什么，到底有什么关系。</p>
+<h2 id="进程的官方定义？"><a href="#进程的官方定义？" class="headerlink" title="进程的官方定义？"></a>进程的官方定义？</h2><p>维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B">进程</a>（英语：process），是指计算机中已运行的程序。<br>百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9B%E7%A8%8B/382503">进程</a>，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。</p>
+<h2 id="线程的官方定义？"><a href="#线程的官方定义？" class="headerlink" title="线程的官方定义？"></a>线程的官方定义？</h2><p>维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。<br>百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。</p>
+<p><strong>小结一下，仅看官方定义，你一定还是一头雾水，不明白进程和线程到底是什么。但是，官方的定义是非常重要的。学习一个新概念之前，一定要先看官方定义。等你学完这个概念，理解了之后，再回头看官方的定义，你就会发现官方的概念是简洁而准确的。</strong></p>
+<h2 id="进程，线程的通俗解释"><a href="#进程，线程的通俗解释" class="headerlink" title="进程，线程的通俗解释"></a>进程，线程的通俗解释</h2><p>进程比较好理解，就是程序一运行，我们就可以说程序创建了一个进程（至少一个，多进程不在本篇的讨论范围之内）。当程序运行结束，该进程就会被销毁。所以我们也可以说，程序是永久存在，进程只是暂时存在。</p>
+<p>进程的英文单词是 process，process 还有一个意思，就是处理。计算机是一个新事务，在进程的概念出现之前，process 这个单词就已经存在了，那么为什么要把进程命名为处理呢？</p>
+<p>这就和进程的本质有关了，程序每次的运行，本质上就是发出些指令，需要 CPU 来执行，站在 CPU 的角度来看，可不就是在处理吗，处理程序发出的指令。所以把进程命名为 process，是非常形象的，也能够帮助接触到的人理解进程的本质。</p>
+<p><strong>对进程这个概念的理解过程，也能够体现阅读英文文档的重要性，尤其是计算机领域。计算中很多概念都是来自英文世界，如果只看中文文档，很多概念是意译。就是说翻译者是根据自己的理解，然后给翻译成中文，在很多场景下缺少了英文描述的准确性，人为增加了接触者的理解难度。</strong></p>
+<p><strong>对计算机从业者来讲，学会阅读英文文档，不仅可以让你学习到最新的技术，更能帮助你准确理解概念，降低学习难度。</strong><br>我们知道，CPU 的计算资源是独占性的，每次只能处理一个任务（此处为了理解方便，只考虑单核 CPU 的情况，多核 CPU 可以理解为多个 CPU）。那么，如果进程内的一个任务阻塞了，其他任务不就全阻塞了吗？如果按照这样的方式设计，计算机的运行效率就会特别低，也没有充分利用好 CPU 的硬件资源。</p>
+<p>为了提高计算机的运行效率，充分利用好硬件资源，线程的概念便孕育而生。把一个进程内要处理的任务细分，以任务为单位发送给 CPU，CPU 以每个细分好的任务为单位来处理，如果一个任务阻塞了（比如等待输入），CPU 就去处理其他任务，直到原来的任务有响应了，CPU 才会再转过头来处理之前的任务（CPU 的实际过程调度过程会更复杂，任务还会有优先级之分）。这里的每个小任务，就是指线程了。</p>
+<p>由此，我们可以知道，线程是为了充分利用好 CPU 而从一个进程内分出来的。也就是说，<strong>一个线程必从属于某个进程；一个进程可以有多个线程。</strong></p>
+<h2 id="线程的三种实现方式"><a href="#线程的三种实现方式" class="headerlink" title="线程的三种实现方式"></a>线程的三种实现方式</h2><p>我们知道，先有了进程，然后为了加快处理速度，更好地利用 CPU 资源，才有了线程。刚开始时，用户有并发处理的需要，但是操作系统并不支持多线程，所以只能由软件工程师利用函数库，在代码里面手动创建线程，然后再以线程为单位，传给 CPU，提高程序的处理。这种由用户自己创建线程的方式，就叫做<strong>用户线程（User Thread）。</strong></p>
 <center>
     <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/用户线程.png"
+      src="/images/2020081801_user_thread.png"
     >
     <div style="color: #999;">用户线程</div>
 </center>
 
-<p>&emsp;&emsp;随着用户线程的普及，各个操作系统(Windows,Solaris,Linux)内核也逐渐支持了多线程。从此用户不需要再在代码里面手动创建线程，操作系统会自动将进程处理成多线程的执行，实现并行操作。这种由操作系统内核自动创建线程的方式，就叫做<strong>内核线程（Kernel Thread）。</strong></p>
+<p>随着用户线程的普及，各个操作系统(Windows,Solaris,Linux)内核也逐渐支持了多线程。从此用户不需要再在代码里面手动创建线程，操作系统会自动将进程处理成多线程的执行，实现并行操作。这种由操作系统内核自动创建线程的方式，就叫做<strong>内核线程（Kernel Thread）。</strong></p>
 <center>
     <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/内核线程.png"
+      src="/images/2020081801_kernel_thread.png"
     >
     <div style="color: #999;">内核线程</div>
 </center>
 
-<p>&emsp;&emsp;在内核线程实现后，有操作系统(Solaris,Linux)为了能够更高效的运行，使用了<strong>轻量级进程（Light-weight process）</strong>方案。所谓轻量级进程，首先在操作系统内核中支持用户线程，并且一个进程可以有多个轻量级进程/轻权进程，每个轻权进程再由一个单独的内核线程来支持。但是，由于这种机制过于复杂，在Solaris的实际实践中并没有发挥出想象中的优势，所以Solaris就又退回了内核线程方案。</p>
+<p>在内核线程实现后，有操作系统(Solaris,Linux)为了能够更高效的运行，使用了<strong>轻量级进程（Light-weight process）</strong>方案。所谓轻量级进程，首先在操作系统内核中支持用户线程，并且一个进程可以有多个轻量级进程/轻权进程，每个轻权进程再由一个单独的内核线程来支持。但是，由于这种机制过于复杂，在 Solaris 的实际实践中并没有发挥出想象中的优势，所以 Solaris 就又退回了内核线程方案。</p>
 <center>
     <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/轻量级进程.png"
+      src="/images/2020081801_light_weight_process.png"
     >
     <div style="color: #999;">轻量级进程</div>
 </center>
@@ -374,7 +447,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/17/2020081702_nginx_config/" class="post-title-link" itemprop="url">Nginx作为静态资源服务器时的配置</a>
+            <a href="/2020/08/17/2020081702_nginx_config/" class="post-title-link" itemprop="url">Nginx 作为静态资源服务器时的配置</a>
         </h2>
 
         <div class="post-meta">
@@ -383,10 +456,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-08-17 19:19:00 / 修改时间：22:43:02" itemprop="dateCreated datePublished" datetime="2020-08-17T19:19:00+08:00">2020-08-17</time>
+              <time title="创建时间：2020-08-17 19:19:00" itemprop="dateCreated datePublished" datetime="2020-08-17T19:19:00+08:00">2020-08-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 14:04:42" itemprop="dateModified" datetime="2020-08-24T14:04:42+08:00">2020-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -406,9 +485,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>静态资源服务器指图片服务器、存放前端代码的服务器（含vue开发的单页面应用）</strong><br>Nginx作为一个静态资源服务器时，只需要将以下配置复制到nginx.conf文件内即可。</p>
-<h2 id="nginx-conf配置代码"><a href="#nginx-conf配置代码" class="headerlink" title="nginx.conf配置代码"></a>nginx.conf配置代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1; <span class="comment"># 进程数，根据服务器的CPU核数设置，单核CPU是1，双核是2，依此类推</span></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    accept_mutex on;  <span class="comment"># 设置网路连接序列化，防止惊群现象发生，默认为on</span></span><br><span class="line">    multi_accept on;  <span class="comment"># 设置一个进程是否同时接受多个网络连接，默认为off</span></span><br><span class="line">    worker_connections  1024; <span class="comment"># 单个进程的最大并发连接数 （最大连接数=单个进程连接数*进程数），默认为512</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types; <span class="comment"># 设定配置文件所包含的文件类型，可以减少主配置文件的复杂度</span></span><br><span class="line">    default_type  application/octet-stream; <span class="comment"># 默认文件类型，默认为text/plain</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#access_log off; # 取消服务日志   </span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># sendfile指令指定 nginx 是否调用sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为on。</span></span><br><span class="line">    <span class="comment"># 如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络IO处理速度，降低系统uptime。</span></span><br><span class="line">    <span class="comment"># 注意：如果图片显示不正常把这个改成off。</span></span><br><span class="line">    sendfile        on; </span><br><span class="line">    <span class="comment">#tcp_nopush     on; # 此选项允许或禁止使用socke的TCP_CORK的选项，此选项仅在使用sendfile的时候使用</span></span><br><span class="line"></span><br><span class="line">    keepalive_timeout  120; <span class="comment"># 长连接超时时间，单位是秒。在超过这个时间之后，服务器会关闭该连接</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on; # 开启gzip压缩输出</span></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80; <span class="comment"># 监听端口</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 域名可以有多个，用空格隔开</span></span><br><span class="line">        server_name  www.yourdomain.com;</span><br><span class="line"></span><br><span class="line">        charset utf-8; <span class="comment"># 编码类型</span></span><br><span class="line"></span><br><span class="line">            location / &#123;</span><br><span class="line">                      root  your_file_path; <span class="comment"># 入口文件所在目录</span></span><br><span class="line">                try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ @router; <span class="comment"># 需要指向下面的@router否则会出现vue的路由在nginx中刷新出现404</span></span><br><span class="line">                index  index.html index.htm; <span class="comment"># 默认入口文件名称</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment"># 对应上面的@router，主要原因是路由的路径资源并不是一个真实的路径，所以无法找到具体的文件</span></span><br><span class="line">            <span class="comment"># 因此需要rewrite到index.html中，然后交给路由在处理请求资源</span></span><br><span class="line">            location @router &#123;</span><br><span class="line">                rewrite ^.*$ /index.html last;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">            error_page   500 502 503 504  /50x.html;</span><br><span class="line">            location = /50x.html &#123;</span><br><span class="line">                root   html;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>本篇文章仅是抛砖引玉，想学习更多Nginx配置知识，可以参考以下几篇文章：</strong><br><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903741678698510">掘金-nginx.conf 配置文件详解</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7c86efe1987">简书-nginx配置文件详解中文版</a><br><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/nginx-setup-intro.html">runoob-Nginx 配置详解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/tjcyjd/article/details/50695922">CSDN-Nginx配置文件（nginx.conf）配置详解</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dongye95/p/11096785.html">博客园-Nginx配置文件详解</a></p>
+          <p><strong>静态资源服务器指图片服务器、存放前端代码的服务器（含 vue 开发的单页面应用）</strong><br>Nginx 作为一个静态资源服务器时，只需要将以下配置复制到 nginx.conf 文件内即可。</p>
+<h2 id="nginx-conf-配置代码"><a href="#nginx-conf-配置代码" class="headerlink" title="nginx.conf 配置代码"></a>nginx.conf 配置代码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">worker_processes  1; <span class="comment"># 进程数，根据服务器的CPU核数设置，单核CPU是1，双核是2，依此类推</span></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    accept_mutex on;  <span class="comment"># 设置网路连接序列化，防止惊群现象发生，默认为on</span></span><br><span class="line">    multi_accept on;  <span class="comment"># 设置一个进程是否同时接受多个网络连接，默认为off</span></span><br><span class="line">    worker_connections  1024; <span class="comment"># 单个进程的最大并发连接数 （最大连接数=单个进程连接数*进程数），默认为512</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types; <span class="comment"># 设定配置文件所包含的文件类型，可以减少主配置文件的复杂度</span></span><br><span class="line">    default_type  application/octet-stream; <span class="comment"># 默认文件类型，默认为text/plain</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#access_log off; # 取消服务日志   </span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># sendfile指令指定 nginx 是否调用sendfile 函数（zero copy 方式）来输出文件，对于普通应用，必须设为on。</span></span><br><span class="line">    <span class="comment"># 如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络IO处理速度，降低系统uptime。</span></span><br><span class="line">    <span class="comment"># 注意：如果图片显示不正常把这个改成off。</span></span><br><span class="line">    sendfile        on; </span><br><span class="line">    <span class="comment">#tcp_nopush     on; # 此选项允许或禁止使用socke的TCP_CORK的选项，此选项仅在使用sendfile的时候使用</span></span><br><span class="line"></span><br><span class="line">    keepalive_timeout  120; <span class="comment"># 长连接超时时间，单位是秒。在超过这个时间之后，服务器会关闭该连接</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on; # 开启gzip压缩输出</span></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80; <span class="comment"># 监听端口</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 域名可以有多个，用空格隔开</span></span><br><span class="line">        server_name  www.yourdomain.com;</span><br><span class="line"></span><br><span class="line">        charset utf-8; <span class="comment"># 编码类型</span></span><br><span class="line"></span><br><span class="line">            location / &#123;</span><br><span class="line">                      root  your_file_path; <span class="comment"># 入口文件所在目录</span></span><br><span class="line">                try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ @router; <span class="comment"># 需要指向下面的@router否则会出现vue的路由在nginx中刷新出现404</span></span><br><span class="line">                index  index.html index.htm; <span class="comment"># 默认入口文件名称</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment"># 对应上面的@router，主要原因是路由的路径资源并不是一个真实的路径，所以无法找到具体的文件</span></span><br><span class="line">            <span class="comment"># 因此需要rewrite到index.html中，然后交给路由在处理请求资源</span></span><br><span class="line">            location @router &#123;</span><br><span class="line">                rewrite ^.*$ /index.html last;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">            error_page   500 502 503 504  /50x.html;</span><br><span class="line">            location = /50x.html &#123;</span><br><span class="line">                root   html;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>本篇文章仅是抛砖引玉，想学习更多 Nginx 配置知识，可以参考以下几篇文章：</strong><br><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903741678698510">掘金-nginx.conf 配置文件详解</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a7c86efe1987">简书-nginx 配置文件详解中文版</a><br><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/nginx-setup-intro.html">runoob-Nginx 配置详解</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/tjcyjd/article/details/50695922">CSDN-Nginx 配置文件（nginx.conf）配置详解</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dongye95/p/11096785.html">博客园-Nginx 配置文件详解</a></p>
 
       
     </div>
@@ -444,7 +523,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/17/2020081701_mongo_tools/" class="post-title-link" itemprop="url">mongoBD导入导出数据库命令</a>
+            <a href="/2020/08/17/2020081701_mongo_tools/" class="post-title-link" itemprop="url">MongoDB 导入导出数据库命令</a>
         </h2>
 
         <div class="post-meta">
@@ -453,10 +532,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-08-17 09:50:00 / 修改时间：09:48:29" itemprop="dateCreated datePublished" datetime="2020-08-17T09:50:00+08:00">2020-08-17</time>
+              <time title="创建时间：2020-08-17 09:50:00" itemprop="dateCreated datePublished" datetime="2020-08-17T09:50:00+08:00">2020-08-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 14:07:11" itemprop="dateModified" datetime="2020-08-24T14:07:11+08:00">2020-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -476,18 +561,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>&emsp;&emsp;MongoDB是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。在使用过程中如果有疑问，请查阅MongoDB的<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">官方文档</a>。大多数错误都是操作不当导致，查阅文档即可解决。</p>
-<p><strong>&emsp;&emsp;然后执行导出命令，Windows系统内，要先cd到mongoBD的bin目录下，再输入命令</strong><br><strong>&emsp;&emsp;值得一提的是，从MongoDB 4.4开始，<a target="_blank" rel="noopener" href="https://docs.mongodb.com/database-tools/mongoimport/#bin.mongoimport">mongoimport</a>等工具已经和MongoDB Server分开发布，并使用其自己的版本控制（初始版本为）100.0.0。所以，在Windows平台内使用，必须单独下载并安装<a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/database-tools">MongoDB数据库工具包</a></strong></p>
-<h2 id="导出集合操作"><a href="#导出集合操作" class="headerlink" title="导出集合操作"></a>导出集合操作</h2><p>&emsp;&emsp;导出shangcheng数据库内的shop集合/表为shop.json文件，并保存到bin目录</p>
+          <p>MongoDB 是一个基于分布式文件存储的数据库。由 C++ 语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。在使用过程中如果有疑问，请查阅 MongoDB 的<a target="_blank" rel="noopener" href="https://docs.mongodb.com/">官方文档</a>。大多数错误都是操作不当导致，查阅文档即可解决。</p>
+<p><strong>然后执行导出命令，Windows 系统内，要先 cd 到 MongoDB 的 bin 目录下，再输入命令</strong><br><strong>值得一提的是，从 MongoDB 4.4开始，<a target="_blank" rel="noopener" href="https://docs.mongodb.com/database-tools/mongoimport/#bin.mongoimport">mongoimport</a>等工具已经和 MongoDB Server 分开发布，并使用其自己的版本控制（初始版本为）100.0.0。所以，在 Windows 平台内使用，必须单独下载并安装 <a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/database-tools">MongoDB数据库工具包</a></strong></p>
+<h2 id="导出集合操作"><a href="#导出集合操作" class="headerlink" title="导出集合操作"></a>导出集合操作</h2><p>导出 shangcheng 数据库内的 shop 集合/表为 shop.json 文件，并保存到 bin 目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoexport -d shangcheng -c shop  -o shop.json</span><br></pre></td></tr></table></figure>
-<h2 id="导入集合操作"><a href="#导入集合操作" class="headerlink" title="导入集合操作"></a>导入集合操作</h2><p>&emsp;&emsp;将bin目录下的shop.json文件导入到shangcheng数据库的shop集合/表，没有shop集合/表时会自动创建</p>
+<h2 id="导入集合操作"><a href="#导入集合操作" class="headerlink" title="导入集合操作"></a>导入集合操作</h2><p>将 bin 目录下的 shop.json 文件导入到 shangcheng 数据库的 shop 集合/表，没有 shop 集合/表时会自动创建</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoimport -d shangcheng -c shop --file shop.json</span><br></pre></td></tr></table></figure>
-<h2 id="一键导出所有数据库（备份）"><a href="#一键导出所有数据库（备份）" class="headerlink" title="一键导出所有数据库（备份）"></a>一键导出所有数据库（备份）</h2><p>&emsp;&emsp;连接到在端口27017上运行的本地MongoDB实例并使用默认设置导出内容：</p>
+<h2 id="一键导出所有数据库（备份）"><a href="#一键导出所有数据库（备份）" class="headerlink" title="一键导出所有数据库（备份）"></a>一键导出所有数据库（备份）</h2><p>连接到在端口27017上运行的本地 MongoDB 实例并使用默认设置导出内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongodump</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;要指定MongoDB实例的主机和/或端口，请查阅<a target="_blank" rel="noopener" href="https://docs.mongodb.com/database-tools/mongodump/">官方文档</a></p>
-<h2 id="一键导入所有数据库（恢复）"><a href="#一键导入所有数据库（恢复）" class="headerlink" title="一键导入所有数据库（恢复）"></a>一键导入所有数据库（恢复）</h2><p><strong>&emsp;&emsp;一键导入所有数据库操作，需要保证备份的数据库文件已经提前复制到mongoBD的bin目录下的dump文件夹内，再输入命令</strong><br>&emsp;&emsp;从dump目录还原到在端口27017上运行的本地MongoDB实例：</p>
+<p>要指定 MongoDB 实例的主机和/或端口，请查阅<a target="_blank" rel="noopener" href="https://docs.mongodb.com/database-tools/mongodump/">官方文档</a></p>
+<h2 id="一键导入所有数据库（恢复）"><a href="#一键导入所有数据库（恢复）" class="headerlink" title="一键导入所有数据库（恢复）"></a>一键导入所有数据库（恢复）</h2><p><strong>一键导入所有数据库操作，需要保证备份的数据库文件已经提前复制到 MongoDB 的 bin 目录下的 dump 文件夹内，再输入命令</strong><br>从dump目录还原到在端口27017上运行的本地 MongoDB 实例：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongorestore  dump/</span><br></pre></td></tr></table></figure>
-<p><strong>&emsp;&emsp;mongorestore仅执行插入操作，不执行更新。也就是说，如果将文档还原到现有数据库，并且现有数据库内有文档的_id与要还原的文档_id相同时， mongorestore不会覆盖这些文档。</strong></p>
+<p><strong>mongorestore 仅执行插入操作，不执行更新。也就是说，如果将文档还原到现有数据库，并且现有数据库内有文档的 _id 与要还原的文档 _id 相同时， mongorestore 不会覆盖这些文档。</strong></p>
 
       
     </div>
@@ -532,10 +617,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-08-16 21:20:00 / 修改时间：22:57:37" itemprop="dateCreated datePublished" datetime="2020-08-16T21:20:00+08:00">2020-08-16</time>
+              <time title="创建时间：2020-08-16 21:20:00" itemprop="dateCreated datePublished" datetime="2020-08-16T21:20:00+08:00">2020-08-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 14:14:37" itemprop="dateModified" datetime="2020-08-24T14:14:37+08:00">2020-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -555,13 +646,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>&emsp;&emsp;许多初学者，或者想走向全栈的前端开发者，对node和koa的关系认识混乱，阻碍了大家技术的进步，所以我打算简述一下这几个技术之间的关系，希望能够对初学者有所帮助。先声明，此文章仅为了让初学者能够了解js vue node koa 这些技术之间的关系，对每项技术的深入讨论，并不在本篇文章的写作目的之内，敬请谅解。<br>&emsp;&emsp;我先分别介绍一下这几个技术，然后再总述这些技术之间的关系。</p>
-<h2 id="js是什么？"><a href="#js是什么？" class="headerlink" title="js是什么？"></a>js是什么？</h2><p>&emsp;&emsp;JavaScript，简称JS，是一种高级脚本语言（编程语言），在前端开发中具有绝对的统治地位。<br>&emsp;&emsp;JavaScript在1995年由Netscape公司的Brendan Eich，在网景浏览器上首次设计实现而成，用来控制浏览器行为，让网页能够实现更复杂的功能。因为Netscape公司与Sun公司（创造Java语言的公司）合作，Netscape管理层希望它外观看起来像Java，因此取名为JavaScript。<br>&emsp;&emsp;1996年8月，微软模仿JavaScript开发了一种相近的语言，取名为JScript（JavaScript是Netscape的注册商标，微软不能用），首先内置于IE 3.0。Netscape公司面临丧失浏览器脚本语言的主导权的局面。<br>&emsp;&emsp;1996年11月，Netscape公司决定将JavaScript提交给国际标准化组织ECMA（European Computer Manufacturers Association），希望JavaScript能够成为国际标准，以此抵抗微软。ECMA的39号技术委员会（Technical Committee 39）负责制定和审核这个标准，成员由业内的大公司派出的工程师组成，目前共25个人。该委员会定期开会，所有的邮件讨论和会议记录，都是公开的。<br>&emsp;&emsp;1997年7月，ECMA组织发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为ECMAScript。这个版本就是ECMAScript 1.0版。<br>&emsp;&emsp;之所以不叫JavaScript，一方面是由于商标的关系，Java是Sun公司的商标，根据一份授权协议，只有Netscape公司可以合法地使用JavaScript这个名字，且JavaScript已经被Netscape公司注册为商标，另一方面也是想体现这门语言的制定者是ECMA，不是Netscape，这样有利于保证这门语言的开放性和中立性。<br>&emsp;&emsp;有了ECMA组织的加持，JavaScript很快地统治了众多浏览器，成为了前端开发中最流行的脚本语言。<br>&emsp;&emsp;ECMAscript 5.1版在2011年6月发布之后，ECMA就使用了新的命名方式。2015年6月，ECMAScript 6正式发布，并且更名为“ECMAScript 2015”。之后每年发布一个ECMAScirpt的版本，分别为“ECMAScript 2016”，“ECMAScript 2017”等。<br>&emsp;&emsp;但是，很多人还是习惯于使用ES6来称呼ECMAscript 5.1版之后的版本。所以，如果你听别人说ES6，其实并非特指“ECMAScript 2015”这一个版本，而是指ECMAscript 5.1版之后所有的版本。</p>
-<p><strong>&emsp;&emsp;总结一下，JavaScript，简称JS，是前端开发中最流行的脚本语言。JavaScript的标准由国际标准化组织ECMA制定，老版本一般被称为ES5，具有新特性的版本被称为ES6。并且如果没有特殊说明，ES6，并非特指“ECMAScript 2015”这一个版本，而是指ECMAscript 5.1版之后所有的版本。</strong></p>
-<h2 id="vue是什么？"><a href="#vue是什么？" class="headerlink" title="vue是什么？"></a>vue是什么？</h2><p>&emsp;&emsp;Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的<strong>渐进式框架</strong>，全称Vue.js。通俗的讲，vue是一个前端框架，使用vue进行开发，可以大大加快前端的开发速度。</p>
-<h2 id="node是什么？"><a href="#node是什么？" class="headerlink" title="node是什么？"></a>node是什么？</h2><p>&emsp;&emsp;node全称Node.js，是一个基于JavaScript语法的服务器端开发语言（类似于JAVA）。Node.js基于JavaScript语言，并且整合了谷歌的V8引擎，是一种轻量的、可模块化的开发工具。Node.js可以用于Web 后端服务开发，Web API 服务开发，CLI 工具开发。</p>
-<h2 id="koa是什么？"><a href="#koa是什么？" class="headerlink" title="koa是什么？"></a>koa是什么？</h2><p>&emsp;&emsp;Koa 是一个基于Node.js的 web 框架，主要用于开发 web 应用后端服务和 API服务。</p>
-<h2 id="js-vue-node-koa-这些技术之间的关系"><a href="#js-vue-node-koa-这些技术之间的关系" class="headerlink" title="js vue node koa 这些技术之间的关系"></a>js vue node koa 这些技术之间的关系</h2><p>&emsp;&emsp;Vue是一个前端框架，里面的脚本部分可以使用JavaScript进行开发；Koa是一个服务器端web框架，用于给Node.js在服务器端的开发赋能，加快开发速度；Node.js是一个服务器端开发语言，开发时的语法基于JavaScript。<br>&emsp;&emsp;可以总结为，Node.js给JavaScript插上了飞向各端的翅膀，引来了前端圈的大繁荣，进而诞生了Vue.js这样的前端框架，进一步加强了前端的繁荣。</p>
+          <p>许多初学者，或者想走向全栈的前端开发者，对 node 和 koa 的关系认识混乱，阻碍了大家技术的进步，所以我打算简述一下这几个技术之间的关系，希望能够对初学者有所帮助。</p>
+<p>先声明，此文章仅为了让初学者能够了解 js vue node koa 这些技术之间的关系，对每项技术的深入讨论，并不在本篇文章的写作目的之内，敬请谅解。</p>
+<h2 id="js是什么？"><a href="#js是什么？" class="headerlink" title="js是什么？"></a>js是什么？</h2><p>JavaScript，简称 JS，是一种高级脚本语言（编程语言），在前端开发中具有绝对的统治地位。</p>
+<p>JavaScript 在1995年由 Netscape 公司的 Brendan Eich，在网景浏览器上首次设计实现而成，用来控制浏览器行为，让网页能够实现更复杂的功能。因为 Netscape 公司与 Sun 公司（创造 Java 语言的公司）合作，Netscape 管理层希望它外观看起来像 Java，因此取名为 JavaScript。</p>
+<p>1996年8月，微软模仿 JavaScript 开发了一种相近的语言，取名为 JScript（JavaScript 是 Netscape 的注册商标，微软不能用），首先内置于IE 3.0。Netscape 公司面临丧失浏览器脚本语言的主导权的局面。</p>
+<p>1996年11月，Netscape 公司决定将 JavaScript 提交给国际标准化组织 ECMA（European Computer Manufacturers Association），希望 JavaScript 能够成为国际标准，以此抵抗微软。ECMA 的39号技术委员会（Technical Committee 39）负责制定和审核这个标准，成员由业内的大公司派出的工程师组成，目前共25个人。该委员会定期开会，所有的邮件讨论和会议记录，都是公开的。</p>
+<p>1997年7月，ECMA 组织发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为 ECMAScript。这个版本就是 ECMAScript 1.0 版。</p>
+<p>之所以不叫 JavaScript，一方面是由于商标的关系，Java 是 Sun 公司的商标，根据一份授权协议，只有 Netscape 公司可以合法地使用 JavaScript 这个名字，且 JavaScript 已经被 Netscape 公司注册为商标，另一方面也是想体现这门语言的制定者是 ECMA，不是 Netscape，这样有利于保证这门语言的开放性和中立性。</p>
+<p>有了 ECMA 组织的加持，JavaScript 很快地统治了众多浏览器，成为了前端开发中最流行的脚本语言。</p>
+<p>ECMAscript 5.1 版在2011年6月发布之后，ECMA 就使用了新的命名方式。2015年6月，ECMAScript 6 正式发布，并且更名为“ECMAScript 2015”。之后每年发布一个 ECMAScirpt 的版本，分别为“ECMAScript 2016”，“ECMAScript 2017”等。</p>
+<p>但是，很多人还是习惯于使用 ES6 来称呼 ECMAscript 5.1 版之后的版本。所以，如果你听别人说 ES6，其实并非特指“ECMAScript 2015”这一个版本，而是指 ECMAscript 5.1 版之后所有的版本。</p>
+<p><strong>总结一下，JavaScript，简称 JS，是前端开发中最流行的脚本语言。JavaScript 的标准由国际标准化组织 ECMA 制定，老版本一般被称为 ES5，具有新特性的版本被称为 ES6。并且如果没有特殊说明，ES6，并非特指“ECMAScript 2015”这一个版本，而是指ECMAscript 5.1 版之后所有的版本。</strong></p>
+<h2 id="vue是什么？"><a href="#vue是什么？" class="headerlink" title="vue是什么？"></a>vue是什么？</h2><p>Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的<strong>渐进式框架</strong>，全称 Vue.js。通俗的讲，vue 是一个前端框架，使用vue 进行开发，可以大大加快前端的开发速度。</p>
+<h2 id="node是什么？"><a href="#node是什么？" class="headerlink" title="node是什么？"></a>node是什么？</h2><p>node 全称 Node.js，是一个基于 JavaScript 语法的服务器端开发语言（类似于JAVA）。Node.js 基于 JavaScript 语言，并且整合了谷歌的 V8 引擎，是一种轻量的、可模块化的开发工具。</p>
+<p>Node.js 可以用于 Web 后端服务开发，Web API 服务开发，CLI 工具开发。</p>
+<h2 id="koa是什么？"><a href="#koa是什么？" class="headerlink" title="koa是什么？"></a>koa是什么？</h2><p>Koa 是一个基于 Node.js 的 web 框架，主要用于开发 web 应用后端服务和 API 服务。</p>
+<h2 id="js-vue-node-koa-这些技术之间的关系"><a href="#js-vue-node-koa-这些技术之间的关系" class="headerlink" title="js vue node koa 这些技术之间的关系"></a>js vue node koa 这些技术之间的关系</h2><p>Vue 是一个前端框架，里面的脚本部分可以使用 JavaScript 进行开发；Koa 是一个服务器端web框架，用于给 Node.js 在服务器端的开发赋能，加快开发速度；Node.js 是一个服务器端开发语言，开发时的语法基于 JavaScript。</p>
+<p>可以总结为，Node.js 给 JavaScript 插上了飞向各端的翅膀，引来了前端圈的大繁荣，进而诞生了 Vue.js 这样的前端框架，进一步加强了前端的繁荣。</p>
 
       
     </div>
@@ -606,10 +708,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-08-16 20:58:00 / 修改时间：21:14:36" itemprop="dateCreated datePublished" datetime="2020-08-16T20:58:00+08:00">2020-08-16</time>
+              <time title="创建时间：2020-08-16 20:58:00" itemprop="dateCreated datePublished" datetime="2020-08-16T20:58:00+08:00">2020-08-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 14:12:04" itemprop="dateModified" datetime="2020-08-24T14:12:04+08:00">2020-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -629,9 +737,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>&emsp;&emsp;Nginx 是一款轻量级的 Web 服务器、反向代理服务器，由于它的内存占用少，启动极快，高并发能力强，在互联网项目中广泛应用。Nginx 和 PM2 组合使用，可以给你的 Node 应用插上翅膀。</p>
-<h2 id="Nginx命令使用前提"><a href="#Nginx命令使用前提" class="headerlink" title="Nginx命令使用前提"></a>Nginx命令使用前提</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Windows系统下必须先<span class="built_in">cd</span>到Nginx的安装目录，然后再输入命令</span><br></pre></td></tr></table></figure>
-<h2 id="启动Nginx"><a href="#启动Nginx" class="headerlink" title="启动Nginx"></a>启动Nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接点击Nginx目录下的nginx.exe，或者在命令行工具内运行start nginx</span><br></pre></td></tr></table></figure>
+          <p>Nginx 是一款轻量级的 Web 服务器、反向代理服务器，由于它的内存占用少，启动极快，高并发能力强，在互联网项目中广泛应用。</p>
+<p>Nginx 和 PM2 组合使用，可以给你的 Node 应用插上翅膀。</p>
+<h2 id="Nginx命令使用前提"><a href="#Nginx命令使用前提" class="headerlink" title="Nginx命令使用前提"></a>Nginx命令使用前提</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Windows 系统下必须先 <span class="built_in">cd</span> 到 Nginx 的安装目录，然后再输入命令</span><br></pre></td></tr></table></figure>
+<h2 id="启动Nginx"><a href="#启动Nginx" class="headerlink" title="启动Nginx"></a>启动Nginx</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接点击 Nginx 目录下的 nginx.exe，或者在命令行工具内运行 start nginx</span><br></pre></td></tr></table></figure>
 <h2 id="停止Nginx，暴力关闭（立即停止）"><a href="#停止Nginx，暴力关闭（立即停止）" class="headerlink" title="停止Nginx，暴力关闭（立即停止）"></a>停止Nginx，暴力关闭（立即停止）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop</span><br></pre></td></tr></table></figure>
 <h2 id="停止Nginx，优雅关闭（处理完当前的请求后再退出）"><a href="#停止Nginx，优雅关闭（处理完当前的请求后再退出）" class="headerlink" title="停止Nginx，优雅关闭（处理完当前的请求后再退出）"></a>停止Nginx，优雅关闭（处理完当前的请求后再退出）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s quit</span><br></pre></td></tr></table></figure>
 <h2 id="重新加载配置文件（Nginx修改配置文件后需要重新载入才能起效）"><a href="#重新加载配置文件（Nginx修改配置文件后需要重新载入才能起效）" class="headerlink" title="重新加载配置文件（Nginx修改配置文件后需要重新载入才能起效）"></a>重新加载配置文件（Nginx修改配置文件后需要重新载入才能起效）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
@@ -681,10 +790,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-08-16 20:20:00 / 修改时间：20:55:17" itemprop="dateCreated datePublished" datetime="2020-08-16T20:20:00+08:00">2020-08-16</time>
+              <time title="创建时间：2020-08-16 20:20:00" itemprop="dateCreated datePublished" datetime="2020-08-16T20:20:00+08:00">2020-08-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 13:24:46" itemprop="dateModified" datetime="2020-08-24T13:24:46+08:00">2020-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -704,7 +819,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>&emsp;&emsp;PM2 是一个带有负载均衡功能的 Node 应用进程管理器。使用 PM2 可以实现自动杀死不稳定的进程，0 秒重启，监控访问日志等功能。使用 PM2 之前，一定要确保已经全局安装 PM2 。</p>
+          <p>PM2 是一个带有负载均衡功能的 Node 应用进程管理器。使用 PM2 可以实现自动杀死不稳定的进程，0 秒重启，监控访问日志等功能。使用 PM2 之前，一定要确保已经全局安装 PM2 。</p>
 <h2 id="PM2全局安装命令"><a href="#PM2全局安装命令" class="headerlink" title="PM2全局安装命令"></a>PM2全局安装命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pm2</span><br></pre></td></tr></table></figure>
 <h2 id="启动app-js应用程序"><a href="#启动app-js应用程序" class="headerlink" title="启动app.js应用程序"></a>启动app.js应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js</span><br></pre></td></tr></table></figure>
 <h2 id="停止所有的应用程序"><a href="#停止所有的应用程序" class="headerlink" title="停止所有的应用程序"></a>停止所有的应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop all</span><br></pre></td></tr></table></figure>
@@ -749,7 +864,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/16/2020081601_js_type_transform/" class="post-title-link" itemprop="url">js常用数据类型转换方式总结</a>
+            <a href="/2020/08/16/2020081601_js_type_transform/" class="post-title-link" itemprop="url">js 常用数据类型转换方式总结</a>
         </h2>
 
         <div class="post-meta">
@@ -758,10 +873,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-08-16 20:09:11 / 修改时间：20:18:15" itemprop="dateCreated datePublished" datetime="2020-08-16T20:09:11+08:00">2020-08-16</time>
+              <time title="创建时间：2020-08-16 20:09:11" itemprop="dateCreated datePublished" datetime="2020-08-16T20:09:11+08:00">2020-08-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-24 14:14:46" itemprop="dateModified" datetime="2020-08-24T14:14:46+08:00">2020-08-24</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -781,17 +902,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>&emsp;&emsp;在实际开发过程中，很多HTTP库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过HTTP传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非Number类型直接参与计算，把字符串的true或false当做Boolean类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。</p>
-<h2 id="对象转换成字符串"><a href="#对象转换成字符串" class="headerlink" title="对象转换成字符串"></a>对象转换成字符串</h2><p><strong>主要应用场景：</strong><br><strong>把对象类型的数据储存在localStorage中时</strong></p>
+          <p>在实际开发过程中，很多 HTTP 库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过 HTTP 传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非 Number 类型直接参与计算，把字符串的 true 或 false 当做 Boolean 类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。</p>
+<h2 id="对象转换成字符串"><a href="#对象转换成字符串" class="headerlink" title="对象转换成字符串"></a>对象转换成字符串</h2><p><strong>主要应用场景：</strong><br><strong>把对象类型的数据储存在 localStorage 中时</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = JSON.stringify(obj)</span><br></pre></td></tr></table></figure>
 
-<h2 id="字符串转换成对象"><a href="#字符串转换成对象" class="headerlink" title="字符串转换成对象"></a>字符串转换成对象</h2><p><strong>主要应用场景：</strong><br><strong>从localStorage或Cookies中获取数据后，再次使用数据时</strong></p>
+<h2 id="字符串转换成对象"><a href="#字符串转换成对象" class="headerlink" title="字符串转换成对象"></a>字符串转换成对象</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取数据后，再次使用数据时</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = JSON.parse(str)</span><br></pre></td></tr></table></figure>
 
-<h2 id="字符串转换成整数"><a href="#字符串转换成整数" class="headerlink" title="字符串转换成整数"></a>字符串转换成整数</h2><p><strong>主要应用场景：</strong><br><strong>从localStorage或Cookies中获取储存的时间戳、数字等，需要再次参与计算、比较大小等操作；</strong><br><strong>服务器端获取客户端传的数据，需要参与计算、比较大小等运算，主要在Node.js中使用</strong></p>
+<h2 id="字符串转换成整数"><a href="#字符串转换成整数" class="headerlink" title="字符串转换成整数"></a>字符串转换成整数</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取储存的时间戳、数字等，需要再次参与计算、比较大小等操作；</strong><br><strong>服务器端获取客户端传的数据，需要参与计算、比较大小等运算，主要在 Node.js 中使用</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = parseInt(str)</span><br></pre></td></tr></table></figure>
 
-<h2 id="字符串转换成浮点数"><a href="#字符串转换成浮点数" class="headerlink" title="字符串转换成浮点数"></a>字符串转换成浮点数</h2><p><strong>主要应用场景：</strong><br><strong>跟钱相关的数据，一般要求保留2位小数。Number类型也可以转换成浮点数，然后再保留2位小数</strong></p>
+<h2 id="字符串转换成浮点数"><a href="#字符串转换成浮点数" class="headerlink" title="字符串转换成浮点数"></a>字符串转换成浮点数</h2><p><strong>主要应用场景：</strong><br><strong>跟钱相关的数据，一般要求保留2位小数。Number 类型也可以转换成浮点数，然后再保留2位小数</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatNum = parseFloat(str)</span><br></pre></td></tr></table></figure>
 
 <p><strong>保留两位小数：</strong><br><strong>切记：toFixed(2)处理后返回的是字符串格式</strong></p>
