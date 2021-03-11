@@ -23,22 +23,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
   </script>
 
-  <meta name="description" content="在实际开发过程中，很多 HTTP 库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过 HTTP 传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非 Number 类型直接参与计算，把字符串的 true 或 false 当做 Boolean 类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。 对象转换成字符串">
+  <meta name="description" content="PM2 是一个带有负载均衡功能的 Node 应用进程管理器。使用 PM2 可以实现自动杀死不稳定的进程，0 秒重启，监控访问日志等功能。使用 PM2 之前，一定要确保已经全局安装 PM2 。 PM2全局安装命令1npm install -g pm2 启动app.js应用程序1pm2 start app.js 停止所有的应用程序1pm2 stop all 停止id为0的指定应用程序1pm2 stop">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js 常用数据类型转换方式总结">
-<meta property="og:url" content="http://yoursite.com/2021/02/16/2021021601_js_type_transform/index.html">
+<meta property="og:title" content="RN常用命令总结">
+<meta property="og:url" content="http://yoursite.com/2019/06/13/2019061301_RN_command/index.html">
 <meta property="og:site_name" content="王雪的博客">
-<meta property="og:description" content="在实际开发过程中，很多 HTTP 库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过 HTTP 传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非 Number 类型直接参与计算，把字符串的 true 或 false 当做 Boolean 类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。 对象转换成字符串">
+<meta property="og:description" content="PM2 是一个带有负载均衡功能的 Node 应用进程管理器。使用 PM2 可以实现自动杀死不稳定的进程，0 秒重启，监控访问日志等功能。使用 PM2 之前，一定要确保已经全局安装 PM2 。 PM2全局安装命令1npm install -g pm2 启动app.js应用程序1pm2 start app.js 停止所有的应用程序1pm2 stop all 停止id为0的指定应用程序1pm2 stop">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-16T12:09:11.000Z">
-<meta property="article:modified_time" content="2021-03-07T11:59:46.067Z">
+<meta property="article:published_time" content="2019-06-13T12:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-11T04:23:16.549Z">
 <meta property="article:author" content="王雪">
 <meta property="article:tag" content="开发经验">
-<meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="数据类型转换">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="RN">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2021/02/16/2021021601_js_type_transform/">
+<link rel="canonical" href="http://yoursite.com/2019/06/13/2019061301_RN_command/">
 
 
 <script class="page-configurations">
@@ -51,7 +51,7 @@
   };
 </script>
 
-  <title>js 常用数据类型转换方式总结 | 王雪的博客</title>
+  <title>RN常用命令总结 | 王雪的博客</title>
   
 
 
@@ -185,7 +185,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E8%BD%AC%E6%8D%A2%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">对象转换成字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%88%90%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">字符串转换成对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%88%90%E6%95%B4%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">字符串转换成整数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%88%90%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">字符串转换成浮点数</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PM2%E5%85%A8%E5%B1%80%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">PM2全局安装命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8app-js%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">启动app.js应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E6%89%80%E6%9C%89%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.</span> <span class="nav-text">停止所有的应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2id%E4%B8%BA0%E7%9A%84%E6%8C%87%E5%AE%9A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.</span> <span class="nav-text">停止id为0的指定应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E6%89%80%E6%9C%89%E5%BA%94%E7%94%A8"><span class="nav-number">5.</span> <span class="nav-text">重启所有应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4id%E4%B8%BA0%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">删除id为0的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8Bpm2%E7%9A%84%E6%97%A5%E5%BF%97"><span class="nav-number">7.</span> <span class="nav-text">查看pm2的日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%8D%E7%A7%B0%E4%B8%BAwww%E7%9A%84%E5%BA%94%E7%94%A8%E7%9A%84%E6%97%A5%E5%BF%97"><span class="nav-number">8.</span> <span class="nav-text">查看名称为www的应用的日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E8%BF%9B%E7%A8%8B-%E5%BA%94%E7%94%A8"><span class="nav-number">9.</span> <span class="nav-text">列出所有进程&#x2F;应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E8%BF%9B%E7%A8%8B-%E5%BA%94%E7%94%A8%E7%9A%84%E7%8A%B6%E6%80%81"><span class="nav-number">10.</span> <span class="nav-text">查看所有进程&#x2F;应用的状态</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -201,7 +201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -214,7 +214,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -256,7 +256,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/16/2021021601_js_type_transform/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/2019061301_RN_command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -271,7 +271,7 @@
     
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          js 常用数据类型转换方式总结
+          RN常用命令总结
         </h1>
 
         <div class="post-meta">
@@ -281,14 +281,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-02-16 20:09:11" itemprop="dateCreated datePublished" datetime="2021-02-16T20:09:11+08:00">2021-02-16</time>
+              <time title="创建时间：2019-06-13 20:00:00" itemprop="dateCreated datePublished" datetime="2019-06-13T20:00:00+08:00">2019-06-13</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-07 19:59:46" itemprop="dateModified" datetime="2021-03-07T19:59:46+08:00">2021-03-07</time>
+                <time title="修改时间：2021-03-11 12:23:16" itemprop="dateModified" datetime="2021-03-11T12:23:16+08:00">2021-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,7 +296,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%9A%84%E2%80%9C%E6%9C%AF%E2%80%9D/" itemprop="url" rel="index"><span itemprop="name">技术的“术”</span></a>
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">技术基础</span></a>
                 </span>
             </span>
 
@@ -309,20 +309,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>在实际开发过程中，很多 HTTP 库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过 HTTP 传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非 Number 类型直接参与计算，把字符串的 true 或 false 当做 Boolean 类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。</p>
-<h2 id="对象转换成字符串"><a href="#对象转换成字符串" class="headerlink" title="对象转换成字符串"></a>对象转换成字符串</h2><p><strong>主要应用场景：</strong><br><strong>把对象类型的数据储存在 localStorage 中时</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = JSON.stringify(obj)</span><br></pre></td></tr></table></figure>
-<h2 id="字符串转换成对象"><a href="#字符串转换成对象" class="headerlink" title="字符串转换成对象"></a>字符串转换成对象</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取数据后，再次使用数据时</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = JSON.parse(str)</span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串转换成整数"><a href="#字符串转换成整数" class="headerlink" title="字符串转换成整数"></a>字符串转换成整数</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取储存的时间戳、数字等，需要再次参与计算、比较大小等操作；</strong><br><strong>服务器端获取客户端传的数据，需要参与计算、比较大小等运算，主要在 Node.js 中使用</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = parseInt(str)</span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串转换成浮点数"><a href="#字符串转换成浮点数" class="headerlink" title="字符串转换成浮点数"></a>字符串转换成浮点数</h2><p><strong>主要应用场景：</strong><br><strong>跟钱相关的数据，一般要求保留2位小数。Number 类型也可以转换成浮点数，然后再保留2位小数</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatNum = parseFloat(str)</span><br></pre></td></tr></table></figure>
-
-<p><strong>保留两位小数：</strong><br><strong>切记：toFixed(2)处理后返回的是字符串格式</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatStr = parseFloat(str).toFixed(2)</span><br></pre></td></tr></table></figure>
+        <p>PM2 是一个带有负载均衡功能的 Node 应用进程管理器。使用 PM2 可以实现自动杀死不稳定的进程，0 秒重启，监控访问日志等功能。使用 PM2 之前，一定要确保已经全局安装 PM2 。</p>
+<h2 id="PM2全局安装命令"><a href="#PM2全局安装命令" class="headerlink" title="PM2全局安装命令"></a>PM2全局安装命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pm2</span><br></pre></td></tr></table></figure>
+<h2 id="启动app-js应用程序"><a href="#启动app-js应用程序" class="headerlink" title="启动app.js应用程序"></a>启动app.js应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js</span><br></pre></td></tr></table></figure>
+<h2 id="停止所有的应用程序"><a href="#停止所有的应用程序" class="headerlink" title="停止所有的应用程序"></a>停止所有的应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop all</span><br></pre></td></tr></table></figure>
+<h2 id="停止id为0的指定应用程序"><a href="#停止id为0的指定应用程序" class="headerlink" title="停止id为0的指定应用程序"></a>停止id为0的指定应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop 0</span><br></pre></td></tr></table></figure>
+<h2 id="重启所有应用"><a href="#重启所有应用" class="headerlink" title="重启所有应用"></a>重启所有应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 restart all</span><br></pre></td></tr></table></figure>
+<h2 id="删除id为0的应用"><a href="#删除id为0的应用" class="headerlink" title="删除id为0的应用"></a>删除id为0的应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 delete 0</span><br></pre></td></tr></table></figure>
+<h2 id="查看pm2的日志"><a href="#查看pm2的日志" class="headerlink" title="查看pm2的日志"></a>查看pm2的日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs</span><br></pre></td></tr></table></figure>
+<h2 id="查看名称为www的应用的日志"><a href="#查看名称为www的应用的日志" class="headerlink" title="查看名称为www的应用的日志"></a>查看名称为www的应用的日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs www</span><br></pre></td></tr></table></figure>
+<h2 id="列出所有进程-应用"><a href="#列出所有进程-应用" class="headerlink" title="列出所有进程/应用"></a>列出所有进程/应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br></pre></td></tr></table></figure>
+<h2 id="查看所有进程-应用的状态"><a href="#查看所有进程-应用的状态" class="headerlink" title="查看所有进程/应用的状态"></a>查看所有进程/应用的状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 monit</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -332,8 +329,8 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E5%BC%80%E5%8F%91%E7%BB%8F%E9%AA%8C/" rel="tag"># 开发经验</a>
-              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" rel="tag"># 数据类型转换</a>
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+              <a href="/tags/RN/" rel="tag"># RN</a>
           </div>
 
         
@@ -341,11 +338,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/08/24/2020082401_chinese_standard/" rel="prev" title="中文技术文档的写作规范">
-      <i class="fa fa-chevron-left"></i> 中文技术文档的写作规范
-    </a></div>
       <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/16/2020081601_flutter_command/" rel="next" title="常用命令总结">
+      常用命令总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
