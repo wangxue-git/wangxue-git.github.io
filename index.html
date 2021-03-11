@@ -395,83 +395,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/16/2019031001_use_command/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王雪">
-      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王雪的博客">
-    </span>
-
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/16/2019031001_use_command/" class="post-title-link" itemprop="url">常用命令总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-16 20:58:00" itemprop="dateCreated datePublished" datetime="2020-08-16T20:58:00+08:00">2020-08-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 15:34:51" itemprop="dateModified" datetime="2021-03-11T15:34:51+08:00">2021-03-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">技术基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一篇总结自己常用的开发命令手册。</p>
-<h1 id="Android-命令"><a href="#Android-命令" class="headerlink" title="Android 命令"></a>Android 命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">adb install xxx.apk  <span class="comment">#安装应用程序</span></span><br><span class="line">adb install -r xxx.apk  <span class="comment">#覆盖安装(保留缓存和数据)</span></span><br><span class="line">adb install -s xxx.apk  <span class="comment">#安装 apk 到 sd 卡</span></span><br><span class="line"></span><br><span class="line">adb uninstall package  <span class="comment">#卸载应用程序</span></span><br><span class="line">adb uninstall -k package  <span class="comment">#卸载时保留数据和缓存目录</span></span><br><span class="line"></span><br><span class="line">adb shell pm list packages  <span class="comment">#列出设备上安装的所有 app 包名</span></span><br><span class="line"></span><br><span class="line">adb shell ls /sdcard/  <span class="comment">#列出 sd 卡根目录下所有文件</span></span><br><span class="line">adb shell <span class="built_in">cd</span> /sdcard/  <span class="comment">#定位到 sdcard 目录</span></span><br><span class="line"></span><br><span class="line">adb devices  <span class="comment">#查看所连接的设备以及设备所对应的序列号</span></span><br><span class="line"></span><br><span class="line">gradlew clean  <span class="comment">#清除缓存</span></span><br><span class="line">gradlew assembleRelease  <span class="comment"># Windows 下的打包命令</span></span><br></pre></td></tr></table></figure>
-<h1 id="Git-命令"><a href="#Git-命令" class="headerlink" title="Git 命令"></a>Git 命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .  <span class="comment">#修改后的全部内容暂存</span></span><br><span class="line">git status  <span class="comment">#查看代码状态</span></span><br><span class="line"></span><br><span class="line">hexo generate -deploy  <span class="comment"># github 博客一键发布部署命令</span></span><br></pre></td></tr></table></figure>
-<h1 id="Flutter-命令"><a href="#Flutter-命令" class="headerlink" title="Flutter 命令"></a>Flutter 命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor .  <span class="comment">#查看 flutter 安装情况</span></span><br><span class="line">flutter --version  <span class="comment">#查看版本号</span></span><br><span class="line">flutter或flutter -version  <span class="comment">#自动更新最新 fluter 版本</span></span><br><span class="line"></span><br><span class="line">flutter run  <span class="comment">#运行项目</span></span><br><span class="line">flutter clean  <span class="comment">#清除编译缓存</span></span><br><span class="line">flutter pub get  <span class="comment">#删除 pubspec.lock 后再重新获取</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/18/2019081802_cross-process_communication_android/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -774,6 +697,83 @@
 
 <p><strong>保留两位小数：</strong><br><strong>切记：toFixed(2)处理后返回的是字符串格式</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatStr = parseFloat(str).toFixed(2)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/10/2019031001_use_command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王雪">
+      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王雪的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/10/2019031001_use_command/" class="post-title-link" itemprop="url">常用命令总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-10 20:58:00" itemprop="dateCreated datePublished" datetime="2019-03-10T20:58:00+08:00">2019-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-11 17:30:42" itemprop="dateModified" datetime="2021-03-11T17:30:42+08:00">2021-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">技术基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一篇总结自己常用的开发命令手册。</p>
+<h1 id="Android-命令"><a href="#Android-命令" class="headerlink" title="Android 命令"></a>Android 命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">adb install xxx.apk  <span class="comment">#安装应用程序</span></span><br><span class="line">adb install -r xxx.apk  <span class="comment">#覆盖安装(保留缓存和数据)</span></span><br><span class="line">adb install -s xxx.apk  <span class="comment">#安装 apk 到 sd 卡</span></span><br><span class="line"></span><br><span class="line">adb uninstall package  <span class="comment">#卸载应用程序</span></span><br><span class="line">adb uninstall -k package  <span class="comment">#卸载时保留数据和缓存目录</span></span><br><span class="line"></span><br><span class="line">adb shell pm list packages  <span class="comment">#列出设备上安装的所有 app 包名</span></span><br><span class="line"></span><br><span class="line">adb shell ls /sdcard/  <span class="comment">#列出 sd 卡根目录下所有文件</span></span><br><span class="line">adb shell <span class="built_in">cd</span> /sdcard/  <span class="comment">#定位到 sdcard 目录</span></span><br><span class="line"></span><br><span class="line">adb devices  <span class="comment">#查看所连接的设备以及设备所对应的序列号</span></span><br><span class="line"></span><br><span class="line">gradlew clean  <span class="comment">#清除缓存</span></span><br><span class="line">gradlew assembleRelease  <span class="comment"># Windows 下的打包命令</span></span><br></pre></td></tr></table></figure>
+<h1 id="Git-命令"><a href="#Git-命令" class="headerlink" title="Git 命令"></a>Git 命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .  <span class="comment">#修改后的全部内容暂存</span></span><br><span class="line">git status  <span class="comment">#查看代码状态</span></span><br><span class="line"></span><br><span class="line">hexo generate -deploy  <span class="comment"># github 博客一键发布部署命令</span></span><br></pre></td></tr></table></figure>
+<h1 id="Flutter-命令"><a href="#Flutter-命令" class="headerlink" title="Flutter 命令"></a>Flutter 命令</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">flutter doctor .  <span class="comment">#查看 flutter 安装情况</span></span><br><span class="line">flutter --version  <span class="comment">#查看版本号</span></span><br><span class="line">flutter或flutter -version  <span class="comment">#自动更新最新 fluter 版本</span></span><br><span class="line"></span><br><span class="line">flutter run  <span class="comment">#运行项目</span></span><br><span class="line">flutter clean  <span class="comment">#清除编译缓存</span></span><br><span class="line">flutter pub get  <span class="comment">#删除 pubspec.lock 后再重新获取</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
