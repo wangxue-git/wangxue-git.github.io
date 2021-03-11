@@ -250,92 +250,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/02/16/2019051602_js_type_transform/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王雪">
-      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王雪的博客">
-    </span>
-
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/2019051602_js_type_transform/" class="post-title-link" itemprop="url">js 常用数据类型转换方式总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-16 20:09:11" itemprop="dateCreated datePublished" datetime="2021-02-16T20:09:11+08:00">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 12:23:34" itemprop="dateModified" datetime="2021-03-11T12:23:34+08:00">2021-03-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">技术积累</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在实际开发过程中，很多 HTTP 库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过 HTTP 传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非 Number 类型直接参与计算，把字符串的 true 或 false 当做 Boolean 类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。</p>
-<h2 id="对象转换成字符串"><a href="#对象转换成字符串" class="headerlink" title="对象转换成字符串"></a>对象转换成字符串</h2><p><strong>主要应用场景：</strong><br><strong>把对象类型的数据储存在 localStorage 中时</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = JSON.stringify(obj)</span><br></pre></td></tr></table></figure>
-<h2 id="字符串转换成对象"><a href="#字符串转换成对象" class="headerlink" title="字符串转换成对象"></a>字符串转换成对象</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取数据后，再次使用数据时</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = JSON.parse(str)</span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串转换成整数"><a href="#字符串转换成整数" class="headerlink" title="字符串转换成整数"></a>字符串转换成整数</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取储存的时间戳、数字等，需要再次参与计算、比较大小等操作；</strong><br><strong>服务器端获取客户端传的数据，需要参与计算、比较大小等运算，主要在 Node.js 中使用</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = parseInt(str)</span><br></pre></td></tr></table></figure>
-
-<h2 id="字符串转换成浮点数"><a href="#字符串转换成浮点数" class="headerlink" title="字符串转换成浮点数"></a>字符串转换成浮点数</h2><p><strong>主要应用场景：</strong><br><strong>跟钱相关的数据，一般要求保留2位小数。Number 类型也可以转换成浮点数，然后再保留2位小数</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatNum = parseFloat(str)</span><br></pre></td></tr></table></figure>
-
-<p><strong>保留两位小数：</strong><br><strong>切记：toFixed(2)处理后返回的是字符串格式</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatStr = parseFloat(str).toFixed(2)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/24/2020082401_chinese_standard/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -740,6 +654,92 @@
 <h2 id="查看名称为www的应用的日志"><a href="#查看名称为www的应用的日志" class="headerlink" title="查看名称为www的应用的日志"></a>查看名称为www的应用的日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs www</span><br></pre></td></tr></table></figure>
 <h2 id="列出所有进程-应用"><a href="#列出所有进程-应用" class="headerlink" title="列出所有进程/应用"></a>列出所有进程/应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br></pre></td></tr></table></figure>
 <h2 id="查看所有进程-应用的状态"><a href="#查看所有进程-应用的状态" class="headerlink" title="查看所有进程/应用的状态"></a>查看所有进程/应用的状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 monit</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/16/2019051602_js_type_transform/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王雪">
+      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王雪的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/05/16/2019051602_js_type_transform/" class="post-title-link" itemprop="url">js 常用数据类型转换方式总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-16 20:09:11" itemprop="dateCreated datePublished" datetime="2019-05-16T20:09:11+08:00">2019-05-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-11 15:02:27" itemprop="dateModified" datetime="2021-03-11T15:02:27+08:00">2021-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">技术积累</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在实际开发过程中，很多 HTTP 库会将传输的数据进行类型转换，开发者获取到数据，如果不注意数据格式的转化，就会出现些意想不到的错误（比如：经过 HTTP 传输的数组或对象未经确认就直接遍历，或者直接当做对象使用，或者非 Number 类型直接参与计算，把字符串的 true 或 false 当做 Boolean 类型直接使用等）。这篇文章就记录了一些常用的数据转换方式及使用场景。</p>
+<h2 id="对象转换成字符串"><a href="#对象转换成字符串" class="headerlink" title="对象转换成字符串"></a>对象转换成字符串</h2><p><strong>主要应用场景：</strong><br><strong>把对象类型的数据储存在 localStorage 中时</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str = JSON.stringify(obj)</span><br></pre></td></tr></table></figure>
+<h2 id="字符串转换成对象"><a href="#字符串转换成对象" class="headerlink" title="字符串转换成对象"></a>字符串转换成对象</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取数据后，再次使用数据时</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj = JSON.parse(str)</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串转换成整数"><a href="#字符串转换成整数" class="headerlink" title="字符串转换成整数"></a>字符串转换成整数</h2><p><strong>主要应用场景：</strong><br><strong>从 localStorage 或 Cookies 中获取储存的时间戳、数字等，需要再次参与计算、比较大小等操作；</strong><br><strong>服务器端获取客户端传的数据，需要参与计算、比较大小等运算，主要在 Node.js 中使用</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = parseInt(str)</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串转换成浮点数"><a href="#字符串转换成浮点数" class="headerlink" title="字符串转换成浮点数"></a>字符串转换成浮点数</h2><p><strong>主要应用场景：</strong><br><strong>跟钱相关的数据，一般要求保留2位小数。Number 类型也可以转换成浮点数，然后再保留2位小数</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatNum = parseFloat(str)</span><br></pre></td></tr></table></figure>
+
+<p><strong>保留两位小数：</strong><br><strong>切记：toFixed(2)处理后返回的是字符串格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">floatStr = parseFloat(str).toFixed(2)</span><br></pre></td></tr></table></figure>
       
     </div>
 
