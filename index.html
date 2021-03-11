@@ -319,119 +319,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/18/2020081801_process_thread/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="王雪">
-      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王雪的博客">
-    </span>
-
-    
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/18/2020081801_process_thread/" class="post-title-link" itemprop="url">进程和线程到底是什么关系</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-18 16:26:00" itemprop="dateCreated datePublished" datetime="2020-08-18T16:26:00+08:00">2020-08-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 12:08:40" itemprop="dateModified" datetime="2021-03-11T12:08:40+08:00">2021-03-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">技术基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道 CPU 是什么）的人，明白进程和线程到底是什么，到底有什么关系。</p>
-<h2 id="进程的官方定义？"><a href="#进程的官方定义？" class="headerlink" title="进程的官方定义？"></a>进程的官方定义？</h2><p>维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B">进程</a>（英语：process），是指计算机中已运行的程序。<br>百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9B%E7%A8%8B/382503">进程</a>，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。</p>
-<h2 id="线程的官方定义？"><a href="#线程的官方定义？" class="headerlink" title="线程的官方定义？"></a>线程的官方定义？</h2><p>维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。<br>百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。</p>
-<p><strong>小结一下，仅看官方定义，你一定还是一头雾水，不明白进程和线程到底是什么。但是，官方的定义是非常重要的。学习一个新概念之前，一定要先看官方定义。等你学完这个概念，理解了之后，再回头看官方的定义，你就会发现官方的概念是简洁而准确的。</strong></p>
-<h2 id="进程，线程的通俗解释"><a href="#进程，线程的通俗解释" class="headerlink" title="进程，线程的通俗解释"></a>进程，线程的通俗解释</h2><p>进程比较好理解，就是程序一运行，我们就可以说程序创建了一个进程（至少一个，多进程不在本篇的讨论范围之内）。当程序运行结束，该进程就会被销毁。所以我们也可以说，程序是永久存在，进程只是暂时存在。</p>
-<p>进程的英文单词是 process，process 还有一个意思，就是处理。计算机是一个新事务，在进程的概念出现之前，process 这个单词就已经存在了，那么为什么要把进程命名为处理呢？</p>
-<p>这就和进程的本质有关了，程序每次的运行，本质上就是发出些指令，需要 CPU 来执行，站在 CPU 的角度来看，可不就是在处理吗，处理程序发出的指令。所以把进程命名为 process，是非常形象的，也能够帮助接触到的人理解进程的本质。</p>
-<p><strong>对进程这个概念的理解过程，也能够体现阅读英文文档的重要性，尤其是计算机领域。计算中很多概念都是来自英文世界，如果只看中文文档，很多概念是意译。就是说翻译者是根据自己的理解，然后给翻译成中文，在很多场景下缺少了英文描述的准确性，人为增加了接触者的理解难度。</strong></p>
-<p><strong>对计算机从业者来讲，学会阅读英文文档，不仅可以让你学习到最新的技术，更能帮助你准确理解概念，降低学习难度。</strong><br>我们知道，CPU 的计算资源是独占性的，每次只能处理一个任务（此处为了理解方便，只考虑单核 CPU 的情况，多核 CPU 可以理解为多个 CPU）。那么，如果进程内的一个任务阻塞了，其他任务不就全阻塞了吗？如果按照这样的方式设计，计算机的运行效率就会特别低，也没有充分利用好 CPU 的硬件资源。</p>
-<p>为了提高计算机的运行效率，充分利用好硬件资源，线程的概念便孕育而生。把一个进程内要处理的任务细分，以任务为单位发送给 CPU，CPU 以每个细分好的任务为单位来处理，如果一个任务阻塞了（比如等待输入），CPU 就去处理其他任务，直到原来的任务有响应了，CPU 才会再转过头来处理之前的任务（CPU 的实际过程调度过程会更复杂，任务还会有优先级之分）。这里的每个小任务，就是指线程了。</p>
-<p>由此，我们可以知道，线程是为了充分利用好 CPU 而从一个进程内分出来的。也就是说，<strong>一个线程必从属于某个进程；一个进程可以有多个线程。</strong></p>
-<h2 id="线程的三种实现方式"><a href="#线程的三种实现方式" class="headerlink" title="线程的三种实现方式"></a>线程的三种实现方式</h2><p>我们知道，先有了进程，然后为了加快处理速度，更好地利用 CPU 资源，才有了线程。刚开始时，用户有并发处理的需要，但是操作系统并不支持多线程，所以只能由软件工程师利用函数库，在代码里面手动创建线程，然后再以线程为单位，传给 CPU，提高程序的处理。这种由用户自己创建线程的方式，就叫做<strong>用户线程（User Thread）。</strong></p>
-<center>
-    <img style="border-radius: 0.3125em;
-      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/2020081801_user_thread.png"
-    >
-    <div style="color: #999;">用户线程</div>
-</center>
-  
-随着用户线程的普及，各个操作系统(Windows,Solaris,Linux)内核也逐渐支持了多线程。从此用户不需要再在代码里面手动创建线程，操作系统会自动将进程处理成多线程的执行，实现并行操作。这种由操作系统内核自动创建线程的方式，就叫做**内核线程（Kernel Thread）。**
-<center>
-    <img style="border-radius: 0.3125em;
-      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/2020081801_kernel_thread.png"
-    >
-    <div style="color: #999;">内核线程</div>
-</center>
-  
-在内核线程实现后，有操作系统(Solaris,Linux)为了能够更高效的运行，使用了**轻量级进程（Light-weight process）**方案。所谓轻量级进程，首先在操作系统内核中支持用户线程，并且一个进程可以有多个轻量级进程/轻权进程，每个轻权进程再由一个单独的内核线程来支持。但是，由于这种机制过于复杂，在 Solaris 的实际实践中并没有发挥出想象中的优势，所以 Solaris 就又退回了内核线程方案。
-<center>
-    <img style="border-radius: 0.3125em;
-      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/2020081801_light_weight_process.png"
-    >
-    <div style="color: #999;">轻量级进程</div>
-</center>
-  
-## 总结
-**程序运行时，会至少创建一个进程，进程又会创建从属的线程。不同的进程间相互隔离，同一个进程内的所有线程共享内存，其中一个线程崩溃，则该进程内的线程全部崩溃。一个线程必从属于某个进程；一个进程可以有多个线程。**
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/17/2020081702_nginx_config/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -508,7 +395,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/16/2020081601_flutter_command/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/16/2019031001_use_command/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -524,7 +411,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/16/2020081601_flutter_command/" class="post-title-link" itemprop="url">常用命令总结</a>
+            <a href="/2020/08/16/2019031001_use_command/" class="post-title-link" itemprop="url">常用命令总结</a>
         </h2>
 
         <div class="post-meta">
@@ -541,7 +428,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 15:27:28" itemprop="dateModified" datetime="2021-03-11T15:27:28+08:00">2021-03-11</time>
+                <time title="修改时间：2021-03-11 15:34:51" itemprop="dateModified" datetime="2021-03-11T15:34:51+08:00">2021-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -585,7 +472,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/13/2019061301_RN_command/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/18/2019081802_cross-process_communication_android/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -601,7 +488,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/06/13/2019061301_RN_command/" class="post-title-link" itemprop="url">RN常用命令总结</a>
+            <a href="/2019/08/18/2019081802_cross-process_communication_android/" class="post-title-link" itemprop="url">Android 跨进程通信</a>
         </h2>
 
         <div class="post-meta">
@@ -611,14 +498,124 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-06-13 20:00:00" itemprop="dateCreated datePublished" datetime="2019-06-13T20:00:00+08:00">2019-06-13</time>
+              <time title="创建时间：2019-08-18 16:26:00" itemprop="dateCreated datePublished" datetime="2019-08-18T16:26:00+08:00">2019-08-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 12:23:16" itemprop="dateModified" datetime="2021-03-11T12:23:16+08:00">2021-03-11</time>
+                <time title="修改时间：2021-03-11 16:45:49" itemprop="dateModified" datetime="2021-03-11T16:45:49+08:00">2021-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">技术积累</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>做 Android 开发，必然会遇到跨进程通信问题，网上有各种各样的总结，那针对我自己的理解，下面我将对 Android 的跨进程通信、进程内通信方面做一些总结，主要内容如下。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20190818_cross_process_android.png"
+    >
+    <div style="color: #999;">Android 跨进程通信</div>
+</center>
+  
+
+<h1 id="一、基础知识简介"><a href="#一、基础知识简介" class="headerlink" title="一、基础知识简介"></a>一、基础知识简介</h1><p>在介绍 Android 跨进程通信之前，先简单介绍下进程隔离、进程通信。</p>
+<p>1，进程隔离：</p>
+<p>在操作系统里，进程和进程之间的内存和数据都是不共享的。两个进程就像两个国家，各自为政。目的是为了避免进程间互相操作数据，从而引发安全问题。所以为了实现隔离，进程分别在不同的虚拟地址里，以此实现隔离。</p>
+<p>2，跨进程通信</p>
+<p>扩展上面的例子，两个国家虽然各自为政，但是会有互通的时候。那进程也是一样的，功能有限，想要协作，那就免不了跨进程去通信。这时候就需要采用特殊的通信机制：进程间通信（IPC:Inter-Process Communication，即进程间通信或跨进程通信，后文以IPC替代，在此声明）。</p>
+<h1 id="二、Linux-跨进程通信"><a href="#二、Linux-跨进程通信" class="headerlink" title="二、Linux 跨进程通信"></a>二、Linux 跨进程通信</h1><p>我们知道，Android 系统是基于 Linux 内核实现的，那咱先了解下 Linux 系统的 IPC 方式 。据不完全统计大概有以下6种方式：<br>1,管道 Pipe ;  2,信号 Signal；3,信号量 Semaphone；4,消息队列 Message Queue；5,共享内存 Shared Memmory；6,套接字 Socket；</p>
+<h1 id="三、Android-跨进程通信"><a href="#三、Android-跨进程通信" class="headerlink" title="三、Android 跨进程通信"></a>三、Android 跨进程通信</h1><p>Android IPC 的方式在不同的资料中有不同的说法，但从大方向上看，可以归纳为如下四种：</p>
+<h2 id="1，Activity-方式"><a href="#1，Activity-方式" class="headerlink" title="1，Activity 方式"></a>1，Activity 方式</h2><p>Activity 是四大组件中使用最频繁的，我们先从它说起。其实 Activity 方式实现，就是用 <strong>startActivity()</strong> 来启动另外一个进程的 Activity。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">（1）场景</span><br><span class="line">  我们在用App的时候常会遇到这些情况：</span><br><span class="line">  1）正在看抖音时，看到正在直播卖心仪的商品，点击商品链接跳到另一个页面看商品详情。</span><br><span class="line">  2）用外卖 App 点外卖，要催商家，点击电话号码跳转打电话页面。</span><br><span class="line">  3）某个 App 里看到广告，点击下跳转去看广告去了。</span><br><span class="line">  你看很多场景，这些就是通过 Activity 的方式实现的跨进程通信。</span><br></pre></td></tr></table></figure>
+<p>（2）使用<br>在调用 startActivity(Intent intent) 的时候，intent 有两个类型：显式 Intent 和隐式Intent。</p>
+<p>显式用法，用于进程内组件间通信：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent(this,OtherActivity.class);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+<p>隐式写法，用于IPC：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent();</span><br><span class="line">intent.setAction(Intent.ACTION_CALL);</span><br><span class="line">startActivity(intent);  <span class="comment"># startActivityForResult() 同样，这里不赘述</span></span><br></pre></td></tr></table></figure>
+<h2 id="2，Content-provider（后文以CP简称，在此声明）方式"><a href="#2，Content-provider（后文以CP简称，在此声明）方式" class="headerlink" title="2，Content provider（后文以CP简称，在此声明）方式"></a>2，Content provider（后文以CP简称，在此声明）方式</h2><p>（1）场景<br>当我们开发 App 需要用到联系人，多媒体信息等数据时，往往会使用系统提供的 uri，采用 CP的方式获取。Android 系统中，数据主要存储在自带的SqlLite数据库中，应用要共享 SqlLite 的数据给其他App操作，就要用到CP，就是说，CP主要用于跨进程数据共享。Android 系统提供了很多的 CP 来给 App 使用，比如联系人、日历、多媒体信息等。App 开发者也可以自定义 CP，把自己的数据提供给其他 App 使用，也可自己自定义操作权限，如只允许其他App读取自己的数据，而不允许修改等。</p>
+<p>（2）特点</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）CP 的使用场景是：提供数据共享</span><br><span class="line">2）CP 本质上还是在操作数据库，数据存储在 sdcard 中，所以建立连接和操作数据都属于耗时操作，因此使用时要注意开启子线程去操作。</span><br><span class="line">3）当数据库中数据有变化时，Content Observer 监听到数据库变化会有一定的滞后。</span><br></pre></td></tr></table></figure>
+<h2 id="3，Broadcast方式"><a href="#3，Broadcast方式" class="headerlink" title="3，Broadcast方式"></a>3，Broadcast方式</h2><p>Broadcast 使用比较简单，注册好广播，加上 action，就可以等着接收其他进程发出的广播。发送和接收广播时，可以借助 Intent 来携带数据。但是广播的使用存在很多问题，所以选择广播来跨进程通信是下下策。<br>下面来盘点下它的槽点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1）Broadcast 是一种单向的通信方式。（当一个程序发送广播后，其他应用只能被动地接收，无法向发送者反馈）</span><br><span class="line">2）Broadcast 非常消耗系统资源，会导致系统性能下降。</span><br><span class="line">3）速度慢，容易造成系统 ANR。</span><br><span class="line">4）除了 Parall Broadcast 外，其他无法保证接收到的时间，甚至不一定能收得到。</span><br><span class="line">5）发送者无法确定谁会接收该广播，而接收者也无发确认是谁发来的广播。</span><br><span class="line">6）如果使用 Ordered Broadcast，一个 Receiver 执行时间过长，会影响后面接收者的接收时间，甚至还有可能被中间某个 Receiver 拦截，导致后面 Receiver 无法接收到。</span><br><span class="line">7）如果是静态注册的广播，一个没有开启的进程，都有可能被该广播激活。</span><br><span class="line"></span><br><span class="line">总而言之，使用 Broadcast 来实现跨进程通信，是下下之策！</span><br></pre></td></tr></table></figure>
+<h2 id="4，Service-方式"><a href="#4，Service-方式" class="headerlink" title="4，Service 方式"></a>4，Service 方式</h2><p>启动 Service 的方式有多种，有的用于跨进程通信，有的用于进程内部模块之间的通信。下面简单介绍一下跨进程通信的方式。</p>
+<p>（1）startService()方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent startIntent = new Intent ();</span><br><span class="line">ComponentName componentName = new ComponentName(string packageName，string serviceClassName);</span><br><span class="line">startIntent.setComponent(componentName );</span><br><span class="line">startService( startIntent);</span><br></pre></td></tr></table></figure>
+<p>这个方式启动远程Service实现跨进程通信，耦合度比较低，功能和代码结构清晰，但是存在如下的缺陷：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1）没有好的机制立即返回执行结果，往往Service完成任务后，还需要其他方式向 Client 端反馈。</span><br><span class="line">2）Service 端无法识别 Client 端是谁（只知道有启动命令，无法知道是谁下的命令）。</span><br><span class="line">3）在已经创建好 Service 的情况下，每次调用 startService，就会执行 onStartCommand()生命周期方法，相比 bindService，效率低下。</span><br><span class="line">4）如果 Client 端忘记调用 stopService() 了，那么该 Service 会一直运行下去，是个隐患。</span><br><span class="line"></span><br><span class="line">所以，综合以上缺陷，建议 “startService()方式” 用于同一个 App 内，跨进程的方式用 AIDL 来实现。</span><br></pre></td></tr></table></figure>
+<p>（2）AIDL<br>这种方式是“bindService()”启动方式的一种使用情况，使用很广泛。本文后面会讲解，这里不做过多描述。</p>
+<h2 id="5，总结"><a href="#5，总结" class="headerlink" title="5，总结"></a>5，总结</h2><p>针对上面的介绍，其实Android中跨进程通信的实现，就是利用四大组件来实现的，对方式的优先级选择，总结如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1）如果跨进程需要界面上的交互操作，用隐式 “startActivity()方式”。</span><br><span class="line">2）如果需要共享数据，用“Content Provider方式”。</span><br><span class="line">3）排除前两种情形，就用“AIDL”。</span><br><span class="line">4）仅为了完成功能，又确实不会用“AIDL”的，就用“Broadcast方式”。</span><br></pre></td></tr></table></figure>
+<h1 id="四、Android进程内通信"><a href="#四、Android进程内通信" class="headerlink" title="四、Android进程内通信"></a>四、Android进程内通信</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/16/2019061601_process_thread/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王雪">
+      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王雪的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/16/2019061601_process_thread/" class="post-title-link" itemprop="url">进程和线程到底是什么关系</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-16 16:26:00" itemprop="dateCreated datePublished" datetime="2019-06-16T16:26:00+08:00">2019-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-11 15:41:52" itemprop="dateModified" datetime="2021-03-11T15:41:52+08:00">2021-03-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -639,17 +636,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>PM2 是一个带有负载均衡功能的 Node 应用进程管理器。使用 PM2 可以实现自动杀死不稳定的进程，0 秒重启，监控访问日志等功能。使用 PM2 之前，一定要确保已经全局安装 PM2 。</p>
-<h2 id="PM2全局安装命令"><a href="#PM2全局安装命令" class="headerlink" title="PM2全局安装命令"></a>PM2全局安装命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pm2</span><br></pre></td></tr></table></figure>
-<h2 id="启动app-js应用程序"><a href="#启动app-js应用程序" class="headerlink" title="启动app.js应用程序"></a>启动app.js应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start app.js</span><br></pre></td></tr></table></figure>
-<h2 id="停止所有的应用程序"><a href="#停止所有的应用程序" class="headerlink" title="停止所有的应用程序"></a>停止所有的应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop all</span><br></pre></td></tr></table></figure>
-<h2 id="停止id为0的指定应用程序"><a href="#停止id为0的指定应用程序" class="headerlink" title="停止id为0的指定应用程序"></a>停止id为0的指定应用程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 stop 0</span><br></pre></td></tr></table></figure>
-<h2 id="重启所有应用"><a href="#重启所有应用" class="headerlink" title="重启所有应用"></a>重启所有应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 restart all</span><br></pre></td></tr></table></figure>
-<h2 id="删除id为0的应用"><a href="#删除id为0的应用" class="headerlink" title="删除id为0的应用"></a>删除id为0的应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 delete 0</span><br></pre></td></tr></table></figure>
-<h2 id="查看pm2的日志"><a href="#查看pm2的日志" class="headerlink" title="查看pm2的日志"></a>查看pm2的日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs</span><br></pre></td></tr></table></figure>
-<h2 id="查看名称为www的应用的日志"><a href="#查看名称为www的应用的日志" class="headerlink" title="查看名称为www的应用的日志"></a>查看名称为www的应用的日志</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs www</span><br></pre></td></tr></table></figure>
-<h2 id="列出所有进程-应用"><a href="#列出所有进程-应用" class="headerlink" title="列出所有进程/应用"></a>列出所有进程/应用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 list</span><br></pre></td></tr></table></figure>
-<h2 id="查看所有进程-应用的状态"><a href="#查看所有进程-应用的状态" class="headerlink" title="查看所有进程/应用的状态"></a>查看所有进程/应用的状态</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 monit</span><br></pre></td></tr></table></figure>
+          <p>很多程序员，可能至今也没弄懂进程和线程。本篇文章目的就是以通俗易懂的语言，让有一定计算机基础（至少需要知道 CPU 是什么）的人，明白进程和线程到底是什么，到底有什么关系。</p>
+<h2 id="进程的官方定义？"><a href="#进程的官方定义？" class="headerlink" title="进程的官方定义？"></a>进程的官方定义？</h2><p>维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%A1%8C%E7%A8%8B">进程</a>（英语：process），是指计算机中已运行的程序。<br>百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%BF%9B%E7%A8%8B/382503">进程</a>，进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。</p>
+<h2 id="线程的官方定义？"><a href="#线程的官方定义？" class="headerlink" title="线程的官方定义？"></a>线程的官方定义？</h2><p>维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。<br>百度百科：<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BA%BF%E7%A8%8B">线程</a>（英语：thread）是操作系统能够进行运算调度的最小单位。</p>
+<p><strong>小结一下，仅看官方定义，你一定还是一头雾水，不明白进程和线程到底是什么。但是，官方的定义是非常重要的。学习一个新概念之前，一定要先看官方定义。等你学完这个概念，理解了之后，再回头看官方的定义，你就会发现官方的概念是简洁而准确的。</strong></p>
+<h2 id="进程，线程的通俗解释"><a href="#进程，线程的通俗解释" class="headerlink" title="进程，线程的通俗解释"></a>进程，线程的通俗解释</h2><p>进程比较好理解，就是程序一运行，我们就可以说程序创建了一个进程（至少一个，多进程不在本篇的讨论范围之内）。当程序运行结束，该进程就会被销毁。所以我们也可以说，程序是永久存在，进程只是暂时存在。</p>
+<p>进程的英文单词是 process，process 还有一个意思，就是处理。计算机是一个新事务，在进程的概念出现之前，process 这个单词就已经存在了，那么为什么要把进程命名为处理呢？</p>
+<p>这就和进程的本质有关了，程序每次的运行，本质上就是发出些指令，需要 CPU 来执行，站在 CPU 的角度来看，可不就是在处理吗，处理程序发出的指令。所以把进程命名为 process，是非常形象的，也能够帮助接触到的人理解进程的本质。</p>
+<p><strong>对进程这个概念的理解过程，也能够体现阅读英文文档的重要性，尤其是计算机领域。计算中很多概念都是来自英文世界，如果只看中文文档，很多概念是意译。就是说翻译者是根据自己的理解，然后给翻译成中文，在很多场景下缺少了英文描述的准确性，人为增加了接触者的理解难度。</strong></p>
+<p><strong>对计算机从业者来讲，学会阅读英文文档，不仅可以让你学习到最新的技术，更能帮助你准确理解概念，降低学习难度。</strong><br>我们知道，CPU 的计算资源是独占性的，每次只能处理一个任务（此处为了理解方便，只考虑单核 CPU 的情况，多核 CPU 可以理解为多个 CPU）。那么，如果进程内的一个任务阻塞了，其他任务不就全阻塞了吗？如果按照这样的方式设计，计算机的运行效率就会特别低，也没有充分利用好 CPU 的硬件资源。</p>
+<p>为了提高计算机的运行效率，充分利用好硬件资源，线程的概念便孕育而生。把一个进程内要处理的任务细分，以任务为单位发送给 CPU，CPU 以每个细分好的任务为单位来处理，如果一个任务阻塞了（比如等待输入），CPU 就去处理其他任务，直到原来的任务有响应了，CPU 才会再转过头来处理之前的任务（CPU 的实际过程调度过程会更复杂，任务还会有优先级之分）。这里的每个小任务，就是指线程了。</p>
+<p>由此，我们可以知道，线程是为了充分利用好 CPU 而从一个进程内分出来的。也就是说，<strong>一个线程必从属于某个进程；一个进程可以有多个线程。</strong></p>
+<h2 id="线程的三种实现方式"><a href="#线程的三种实现方式" class="headerlink" title="线程的三种实现方式"></a>线程的三种实现方式</h2><p>我们知道，先有了进程，然后为了加快处理速度，更好地利用 CPU 资源，才有了线程。刚开始时，用户有并发处理的需要，但是操作系统并不支持多线程，所以只能由软件工程师利用函数库，在代码里面手动创建线程，然后再以线程为单位，传给 CPU，提高程序的处理。这种由用户自己创建线程的方式，就叫做<strong>用户线程（User Thread）。</strong></p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/2020081801_user_thread.png"
+    >
+    <div style="color: #999;">用户线程</div>
+</center>
+  
+随着用户线程的普及，各个操作系统(Windows,Solaris,Linux)内核也逐渐支持了多线程。从此用户不需要再在代码里面手动创建线程，操作系统会自动将进程处理成多线程的执行，实现并行操作。这种由操作系统内核自动创建线程的方式，就叫做**内核线程（Kernel Thread）。**
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/2020081801_kernel_thread.png"
+    >
+    <div style="color: #999;">内核线程</div>
+</center>
+  
+在内核线程实现后，有操作系统(Solaris,Linux)为了能够更高效的运行，使用了**轻量级进程（Light-weight process）**方案。所谓轻量级进程，首先在操作系统内核中支持用户线程，并且一个进程可以有多个轻量级进程/轻权进程，每个轻权进程再由一个单独的内核线程来支持。但是，由于这种机制过于复杂，在 Solaris 的实际实践中并没有发挥出想象中的优势，所以 Solaris 就又退回了内核线程方案。
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/2020081801_light_weight_process.png"
+    >
+    <div style="color: #999;">轻量级进程</div>
+</center>
+  
+## 总结
+**程序运行时，会至少创建一个进程，进程又会创建从属的线程。不同的进程间相互隔离，同一个进程内的所有线程共享内存，其中一个线程崩溃，则该进程内的线程全部崩溃。一个线程必从属于某个进程；一个进程可以有多个线程。**
+
       
     </div>
 
