@@ -428,7 +428,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-12 17:20:30" itemprop="dateModified" datetime="2021-03-12T17:20:30+08:00">2021-03-12</time>
+                <time title="修改时间：2021-03-12 17:28:47" itemprop="dateModified" datetime="2021-03-12T17:28:47+08:00">2021-03-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -495,9 +495,10 @@
 <h2 id="SharePreference（简称SP）等数据存储方式"><a href="#SharePreference（简称SP）等数据存储方式" class="headerlink" title="SharePreference（简称SP）等数据存储方式"></a>SharePreference（简称SP）等数据存储方式</h2><p>这个就是数据的持久化和模块间共享数据，除了 SP，还有网络存储、Sqilite 数据库、文件存储等多种方式，功能可以类比跨进程通信的 ContentProvider。</p>
 <p>和跨进程通行方式选择一样，组件间的通信方式也要根据具体需要来确定。</p>
 <h1 id="五、Binder概述"><a href="#五、Binder概述" class="headerlink" title="五、Binder概述"></a>五、Binder概述</h1><p>Binder 是 Android 框架中非常重要的一个机制，在 Framework 中被广泛使用，理解 Binder 对阅读 Framework 源码有着很大的帮助。当然，在 Android 应用层的跨进程通信中，也被广泛使用。</p>
-<h2 id="Binder是什么？"><a href="#Binder是什么？" class="headerlink" title="Binder是什么？"></a>Binder是什么？</h2><p>Binder 英文单词的意思就是 “粘合剂”，把两个物体粘合在一起。说起 Binder 是什么，在 IPC 过程中，从不同的角度来看，它可以被定义为一种机制，实体类、远程代理或者传输对象，这里说的 Binder 是从宏观定义来看的，是说的 Binder 机制。在 Android 中，它是一种高效的 IPC 方式，是 Android 所特有的机制。它采用 C/S 架构模式，基于内存映射（mmap（）），在系统内核空间将 Client 端和 Service 端两个用户空间的进程联系在一起。</p>
+<h2 id="Binder是什么？"><a href="#Binder是什么？" class="headerlink" title="Binder是什么？"></a>Binder是什么？</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（1）Binder 英文单词的意思就是<span class="string">&quot;粘合剂&quot;</span>，把两个物体粘合在一起。</span><br><span class="line">（2）说起 Binder 是什么，在 IPC 过程中，从不同角度来看，它可以被定义为一种机制，实体类、远程代理或者传输对象，这里说的 Binder 是从宏观定义来看的，是说的 Binder 机制。</span><br><span class="line">（3）在 Android 中，它是一种高效的 IPC 方式，是 Android 所特有的机制。</span><br><span class="line">（4）它采用 C/S 架构模式，基于内存映射（mmap（）），在系统内核空间将 Client 端和 Service 端两个用户空间的进程联系在一起。</span><br></pre></td></tr></table></figure>
 <h2 id="Binder的由来"><a href="#Binder的由来" class="headerlink" title="Binder的由来"></a>Binder的由来</h2><p>Binder 前身是某公司开发的 OpenBinder 项目，后来该项目的作者加入了 Google，同时把该项目带进了 Android。从此以后，Binder就成为了 Android 中主要的跨进程通信机制。</p>
-<h2 id="Android-为什么要引入-Binder？"><a href="#Android-为什么要引入-Binder？" class="headerlink" title="Android 为什么要引入 Binder？"></a>Android 为什么要引入 Binder？</h2><h1 id="六、AIDL"><a href="#六、AIDL" class="headerlink" title="六、AIDL"></a>六、AIDL</h1><p>前面我们讲到，为了克服 Linux 中 IPC 各种方式的缺点，在 Android 中引入了 Binder 机制。<br>但是当说起 Binder 在 Android 中的使用时，几乎所有的资料都是在说 AIDL 的使用。<br>AIDL 的全称是 Android Interface Definition Language，即 Android接口定义语言，<strong>是Binder机制实现Android IPC时使用比较广泛的工具。</strong><br>本节用一个 Demo 演示一下 AIDL 的基本实现步骤。基本项目结构如下图：</p>
+<h2 id="Android-为什么要引入-Binder？"><a href="#Android-为什么要引入-Binder？" class="headerlink" title="Android 为什么要引入 Binder？"></a>Android 为什么要引入 Binder？</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">前面提到，Linux 已经具备了这么多的 IPC 方式，为什么 Android 中还要引入 Binder 呢？原因是从性能、稳定性和安全性三方面考虑，Linux 本身的那些方式，往往只能具备一部分因素，无法兼顾。但是 Binder 却不然，</span><br><span class="line">（1）从性能上看，只需要一次数据拷贝，性能上仅次于共享内存；</span><br><span class="line">（2）从稳定性上看，基于C/S架构，职责明确、架构清晰，稳定性好；</span><br><span class="line">（3）从安全性上看，它为每个APP分配UID，而进程的UID是鉴别进程身份的重要标志。</span><br><span class="line"></span><br><span class="line">对于更详细的对比，可以查阅相关资料，本文重点不是探索 Linux，就不赘述了，咱们只需要知道 Binder 比 Linux 其它 IPC 方式更给力就够了。</span><br></pre></td></tr></table></figure>
+<h1 id="六、AIDL"><a href="#六、AIDL" class="headerlink" title="六、AIDL"></a>六、AIDL</h1><p>前面我们讲到，为了克服 Linux 中 IPC 各种方式的缺点，在 Android 中引入了 Binder 机制。<br>但是当说起 Binder 在 Android 中的使用时，几乎所有的资料都是在说 AIDL 的使用。<br>AIDL 的全称是 Android Interface Definition Language，即 Android接口定义语言，<strong>是Binder机制实现Android IPC时使用比较广泛的工具。</strong><br>本节用一个 Demo 演示一下 AIDL 的基本实现步骤。基本项目结构如下图：</p>
 <center>
     <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
