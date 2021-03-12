@@ -428,7 +428,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-11 18:21:17" itemprop="dateModified" datetime="2021-03-11T18:21:17+08:00">2021-03-11</time>
+                <time title="修改时间：2021-03-12 16:24:29" itemprop="dateModified" datetime="2021-03-12T16:24:29+08:00">2021-03-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -453,7 +453,7 @@
 <center>
     <img style="border-radius: 0.3125em;
       box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
-      src="/images/20190818_cross_process_android.png"
+      src="/images/20190818_Intel_process_android.png"
     >
     <div style="color: #999;">Android 跨进程通信</div>
 </center>
@@ -492,11 +492,57 @@
 <h2 id="Handler-方式"><a href="#Handler-方式" class="headerlink" title="Handler 方式"></a>Handler 方式</h2><p>这种方式在子线程和主线程通信中用得很普遍，跨模块使用也常见到，使用方便。需要注意的是Looper和线程问题。</p>
 <h2 id="EventBus方式"><a href="#EventBus方式" class="headerlink" title="EventBus方式"></a>EventBus方式</h2><p>使用简单，耦合度低，也受到很多开发者的喜爱。但也有一些缺点：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）需要导入第三方库。</span><br><span class="line">2）发送消息出去后，被注册的地方都会收到该消息，若处理不当，开发者甚至不容易意识到哪些地方收到了消息并做了处理，带来不必要的混乱。</span><br><span class="line">3）当注册了 EventBus 的模块退出后，容易忘记反注册。</span><br></pre></td></tr></table></figure>
-<h2 id="SharePreference（简称SP）等数据存储方式"><a href="#SharePreference（简称SP）等数据存储方式" class="headerlink" title="SharePreference（简称SP）等数据存储方式"></a>SharePreference（简称SP）等数据存储方式</h2><p>这个就是数据的持久化和模块间共享数据了，除了 SP，还有网络存储，Sqilite 数据库，文件存储等多种方式，功能可以类比跨进程通信的 ContentProvider。</p>
+<h2 id="SharePreference（简称SP）等数据存储方式"><a href="#SharePreference（简称SP）等数据存储方式" class="headerlink" title="SharePreference（简称SP）等数据存储方式"></a>SharePreference（简称SP）等数据存储方式</h2><p>这个就是数据的持久化和模块间共享数据，除了 SP，还有网络存储、Sqilite 数据库、文件存储等多种方式，功能可以类比跨进程通信的 ContentProvider。</p>
 <p>和跨进程通行方式选择一样，组件间的通信方式也要根据具体需要来确定。</p>
-<h1 id="五、Binder概述"><a href="#五、Binder概述" class="headerlink" title="五、Binder概述"></a>五、Binder概述</h1><p>Binder 是 Android 框架中非常重要的一个机制，在 Framework 中被广泛使用，理解 Binder 对阅读 Framework 源码有着很大的帮助。当然，在应用层等层面的跨进程通信中，也被广泛使用。</p>
-<h2 id="Binder是什么？"><a href="#Binder是什么？" class="headerlink" title="Binder是什么？"></a>Binder是什么？</h2><p>Binder 英文单词的意思就是 “粘合剂”，把两个物体粘合在一起。说起 Binder 是什么，在 IPC 过程中，从不同的角度来看，它可以被定义为一种机制，或者实体类，或者远程代理，甚至是传输对象，咱们这里说的 Binder 是从宏观定义来看的，是说的 Binder 机制。在 Android 中，它是一种高效的 IPC 方式，是 Android 所特有的机制。它采用 C/S 架构模式，基于内存映射（mmap（）），在系统内核空间将 Client 端和 Service 端两个用户空间的进程联系在一起。</p>
+<h1 id="五、Binder概述"><a href="#五、Binder概述" class="headerlink" title="五、Binder概述"></a>五、Binder概述</h1><p>Binder 是 Android 框架中非常重要的一个机制，在 Framework 中被广泛使用，理解 Binder 对阅读 Framework 源码有着很大的帮助。当然，在 Android 应用层的跨进程通信中，也被广泛使用。</p>
+<h2 id="Binder是什么？"><a href="#Binder是什么？" class="headerlink" title="Binder是什么？"></a>Binder是什么？</h2><p>Binder 英文单词的意思就是 “粘合剂”，把两个物体粘合在一起。说起 Binder 是什么，在 IPC 过程中，从不同的角度来看，它可以被定义为一种机制，实体类、远程代理或者传输对象，这里说的 Binder 是从宏观定义来看的，是说的 Binder 机制。在 Android 中，它是一种高效的 IPC 方式，是 Android 所特有的机制。它采用 C/S 架构模式，基于内存映射（mmap（）），在系统内核空间将 Client 端和 Service 端两个用户空间的进程联系在一起。</p>
 <h2 id="Binder的由来"><a href="#Binder的由来" class="headerlink" title="Binder的由来"></a>Binder的由来</h2><p>Binder 前身是某公司开发的 OpenBinder 项目，后来该项目的作者加入了 Google，同时把该项目带进了 Android。从此以后，Binder就成为了 Android 中主要的跨进程通信机制。</p>
+<h2 id="Android-为什么要引入-Binder？"><a href="#Android-为什么要引入-Binder？" class="headerlink" title="Android 为什么要引入 Binder？"></a>Android 为什么要引入 Binder？</h2><h1 id="六、AIDL"><a href="#六、AIDL" class="headerlink" title="六、AIDL"></a>六、AIDL</h1><p>前面我们讲到，为了克服 Linux 中 IPC 各种方式的缺点，在 Android 中引入了 Binder 机制。<br>但是当说起 Binder 在 Android 中的使用时，几乎所有的资料都是在说 AIDL 的使用。<br>AIDL 的全称是 Android Interface Definition Language，即 Android接口定义语言，<strong>是Binder机制实现Android IPC时使用比较广泛的工具。</strong><br>本节用一个 Demo 演示一下 AIDL 的基本实现步骤。基本项目结构如下图：</p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20190818_aidl.png"
+    >
+    <div style="color: #999;">AIDL 项目演示步骤</div>
+</center>
+  
+## 新建一个 Android 项目，并在项目下新建两个 App，分别为 Client 端和 Server 端
+简单解释下：Client 端就是可以远程操控的那一端，Server 端就是包含了 Service 干活的那一端。
+  
+## 两个端新建 AIDL 文件
+在 Server 端 main 目录下建立 aidl 文件夹以及 .aidl 文件，并复制一份到 Client 端。注意，Client 端和 Server 端这两个文件是一样的。
+另外，**AS 中提供了快捷方式创建 aidl 文件，在 main 处点击右键 > New > AIDL > AIDL File，按照提示给 aidl 文件命名即可自动创建完成，一步到位。**
+  
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/new_aidl.png"
+    >
+    <div style="color: #999;">AS 一键创建 .aidl 文件</div>
+</center>
+  
+**需要注意的是命名规范，一般都以"I"开头，表示是一个接口**，内容如下：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// IService.aidl</span><br><span class="line">package com.wangxue.aidlserver;</span><br><span class="line">// Declare any non-default types here with import statements</span><br><span class="line">interface IService &#123;</span><br><span class="line">    /**</span><br><span class="line">     * Demonstrates some basic types that you can use as parameters</span><br><span class="line">     * and <span class="built_in">return</span> values <span class="keyword">in</span> AIDL.</span><br><span class="line">     */</span><br><span class="line">//    void basicTypes(int anInt, long aLong, boolean aBoolean, <span class="built_in">float</span> aFloat,</span><br><span class="line">//            double aDouble, String aString);</span><br><span class="line">    void setName(String name);</span><br><span class="line">    String getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+## Server 端创建 Service 文件
+**在文件夹处点击右键 > New > Service > Service 快捷创建**
+创建 AidlService.java，代码如下：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public class AidlService extends Service &#123;</span><br><span class="line">    public final static String TAG = <span class="string">&quot;aidlDemo&quot;</span>;</span><br><span class="line">    public <span class="function"><span class="title">AidlService</span></span>() &#123;&#125;</span><br><span class="line">    @Override</span><br><span class="line">    public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        Log.i(TAG, <span class="string">&quot;service:[onBind]&quot;</span>);</span><br><span class="line">        // TODO: Return the communication channel to the service.</span><br><span class="line">//        throw new UnsupportedOperationException(<span class="string">&quot;Not yet implemented&quot;</span>);</span><br><span class="line">        <span class="built_in">return</span> new MyBinder();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void <span class="function"><span class="title">onCreate</span></span>() &#123;</span><br><span class="line">        super.onCreate();</span><br><span class="line">        Log.i(TAG, <span class="string">&quot;service:[onCreate]&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean onUnbind(Intent intent) &#123;</span><br><span class="line">        Log.i(TAG, <span class="string">&quot;service:[onUnbind]&quot;</span>);</span><br><span class="line">        <span class="built_in">return</span> super.onUnbind(intent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void <span class="function"><span class="title">onDestroy</span></span>() &#123;</span><br><span class="line">        super.onDestroy();</span><br><span class="line">        Log.i(TAG, <span class="string">&quot;service:[onDestroy]&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class MyBinder extends IService.Stub &#123;</span><br><span class="line">        String mName = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        @Override</span><br><span class="line">        public void setName(String name) throws RemoteException &#123;</span><br><span class="line">            Log.i(TAG, <span class="string">&quot;service:[setName]&quot;</span>);</span><br><span class="line">            mName = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String getName() throws RemoteException &#123;</span><br><span class="line">            Log.i(TAG, <span class="string">&quot;service:[getName]&quot;</span>);</span><br><span class="line">            <span class="built_in">return</span> mName;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+为更好的分析流程和生命周期，在需要的地方都添加了 Log。同时在 Server 端的 AndroidManifest.xml 中添加该 Service 的注册信息。注意：
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(1)exported 属性值，如果有<span class="string">&quot;intent-filter&quot;</span>，则默认值为 <span class="literal">true</span>，否则为 <span class="literal">false</span>。所以这里其实可以去掉，因为有<span class="string">&quot;intent-filter&quot;</span>，其默认值就是 <span class="literal">true</span>。</span><br><span class="line">(2)由于启动该 Service 时用的 action 的方式，所以此处就有了<span class="string">&quot;intent-filter&quot;</span>里面的 action。如果用其他方式启动，这个 Service 注册信息就需要做相应改动。</span><br></pre></td></tr></table></figure>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20190818_service_config.png"
+    >
+    <div style="color: #999;">Service 注册信息</div>
+</center>
+  
+## 编译 Server 端和 Client 端 App，生成对应 IServer.java 文件
+当编译时，AS 会自动为我们生成 IServer.java 文件，就是
+
+
+
+
 
       
     </div>
