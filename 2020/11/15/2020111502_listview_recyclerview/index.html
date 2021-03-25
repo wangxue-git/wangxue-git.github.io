@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="msapplication-config" content="/images/browserconfig.xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="可以说 ListView 与 RecyclerView 都是 Android 中为解决多数据集合能动态滚动并且展示在用户界面上诞生的，即使一个屏幕放不下也不会产生 OOM（溢出）。 ListViewLisetView 适配器模式ListView 的实现离不开 Adapter。它的设计可以理解为 MVC 模式：ListView 给出数据来的时候，View 如何实现的具体方式，相当于 V；而 Adap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈 ListView 与 RecyclerView">
+<meta property="og:url" content="http://yoursite.com/2020/11/15/2020111502_listview_recyclerview/index.html">
+<meta property="og:site_name" content="王雪的博客">
+<meta property="og:description" content="可以说 ListView 与 RecyclerView 都是 Android 中为解决多数据集合能动态滚动并且展示在用户界面上诞生的，即使一个屏幕放不下也不会产生 OOM（溢出）。 ListViewLisetView 适配器模式ListView 的实现离不开 Adapter。它的设计可以理解为 MVC 模式：ListView 给出数据来的时候，View 如何实现的具体方式，相当于 V；而 Adap">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/20201115_lv_model.png">
+<meta property="og:image" content="http://yoursite.com/images/20201115_lv_recycle.png">
+<meta property="og:image" content="http://yoursite.com/images/20201115_rv_model.png">
+<meta property="og:image" content="http://yoursite.com/images/20201115_rv_holder.png">
+<meta property="og:image" content="http://yoursite.com/images/20201115_rv_cache.png">
+<meta property="article:published_time" content="2020-11-15T13:35:00.000Z">
+<meta property="article:modified_time" content="2021-03-25T10:04:17.286Z">
+<meta property="article:author" content="王雪">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="ListView">
+<meta property="article:tag" content="RecyclerView">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/20201115_lv_model.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/11/15/2020111502_listview_recyclerview/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>浅谈 ListView 与 RecyclerView | 王雪的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">王雪的博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">编程不停 学习不止 互联网永不眠</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ListView"><span class="nav-number">1.</span> <span class="nav-text">ListView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LisetView-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">LisetView 适配器模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RecycleBin-%E6%9C%BA%E5%88%B6"><span class="nav-number">1.2.</span> <span class="nav-text">RecycleBin 机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RecyclerView"><span class="nav-number">2.</span> <span class="nav-text">RecyclerView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RecyclerView-%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">RecyclerView 基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewHolder"><span class="nav-number">2.2.</span> <span class="nav-text">ViewHolder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E7%BA%A7%E7%BC%93%E5%AD%98"><span class="nav-number">2.3.</span> <span class="nav-text">四级缓存</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">3.</span> <span class="nav-text">区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.1.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B1%80%E6%95%88%E6%9E%9C"><span class="nav-number">3.2.</span> <span class="nav-text">布局效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">点击事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%88%B7%E6%96%B0"><span class="nav-number">3.4.</span> <span class="nav-text">局部刷新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E5%8C%BA%E5%88%AB"><span class="nav-number">3.5.</span> <span class="nav-text">缓存区别</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王雪"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">王雪</p>
+  <div class="site-description" itemprop="description">王雪的博客，分享技术有关的内容</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wangxue-git" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wangxue-git" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/15/2020111502_listview_recyclerview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王雪">
+      <meta itemprop="description" content="王雪的博客，分享技术有关的内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王雪的博客">
+    </span>
+
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈 ListView 与 RecyclerView
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-15 21:35:00" itemprop="dateCreated datePublished" datetime="2020-11-15T21:35:00+08:00">2020-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-25 18:04:17" itemprop="dateModified" datetime="2021-03-25T18:04:17+08:00">2021-03-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E6%9C%AF%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index"><span itemprop="name">技术积累</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>可以说 ListView 与 RecyclerView 都是 Android 中为解决多数据集合能动态滚动并且展示在用户界面上诞生的，即使一个屏幕放不下也不会产生 OOM（溢出）。</p>
+<h1 id="ListView"><a href="#ListView" class="headerlink" title="ListView"></a>ListView</h1><h2 id="LisetView-适配器模式"><a href="#LisetView-适配器模式" class="headerlink" title="LisetView 适配器模式"></a>LisetView 适配器模式</h2><p><strong>ListView 的实现离不开 Adapter。它的设计可以理解为 MVC 模式：</strong>ListView 给出数据来的时候，View 如何实现的具体方式，相当于 V；而 Adapter 提供了相当于 C，指挥了 ListView 的数据加载行为。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20201115_lv_model.png"
+    >
+    <div style="color: #999;">LisetView 适配器模式</div>
+</center>
+
+<h2 id="RecycleBin-机制"><a href="#RecycleBin-机制" class="headerlink" title="RecycleBin 机制"></a>RecycleBin 机制</h2><p>假如 Adapter 中有1万条数据，将这个 Adapter 对象复制给 ListView，如果 ListView 创建 1万个 View，那么 App 肯定就崩溃了，因为 Android 可能没有能力同时绘制这么多的子View。而且即使能绘制，那屏幕大小有限，也是放不下的。因此，<strong>Android 在设计 ListView 这个类的时候，引入了一个 RecycleBin 机制（对子 View 进行回收利用，RecycleBin 直译就是回收箱的意思）。</strong></p>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20201115_lv_recycle.png"
+    >
+    <div style="color: #999;">RecycleBin 机制</div>
+</center>
+
+<p><strong>RecycleBin 中有两个重要的 View 数组，分别是 mActiveViews 和 mScrapViews。</strong>这两个数组中所存储的 View 都是用来复用的，只不过 mActiveViews 中存储的是 OnScreen（屏幕内）的 View，这些 View 很有可能被直接复用；而 mScrapViews 中存储的是 OffScreen（屏幕外）的 View，这些 View 主要是用来间接复用的。</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><ul>
+<li><strong>使用 ViewHolder 模式来提高效率：</strong>避免了每次在调用 getView 的时候都去通过 findViewById 实例化数据。</li>
+<li><strong>异步加载，耗时的操作放在异步线程中：</strong>如果在 Adapter 中的某些操作需要耗费大量的时间，这个时候就要用到异步线程来进行异步就在数据。比如：现在要加载图片，此时我们需要根据 url 访问网络得到数据，然后将数据解析为 Bitmap 设置给 View。这些操作如果不进行异步处理而直接放入Adapter，可想而知，我们的 ListView 会有多卡。<br><strong>一种是通过多线程方式通过 Handler + Message 进行异步加载。</strong><br><strong>一种是通过 AsyncTask 来进行异步操作。</strong></li>
+<li><strong>布局里尽量避免半透明元素：</strong>因为半透明元素绘制比不透明的更耗时。</li>
+</ul>
+<p>当然这里只是列出一些常见的优化方案，优化这个话题在编程里是永远无止境的。</p>
+<h1 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h1><p>在 Android 上优于 ListView，它的灵活、组装设置、多缓存机制可以适应多列表在 Android 开发中的各种各样的需求。并且改善了 ListView 中的某些缺陷。</p>
+<h2 id="RecyclerView-基本结构"><a href="#RecyclerView-基本结构" class="headerlink" title="RecyclerView 基本结构"></a>RecyclerView 基本结构</h2><center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20201115_rv_model.png"
+    >
+    <div style="color: #999;">RecyclerView 基本结构</div>
+</center>
+
+<h2 id="ViewHolder"><a href="#ViewHolder" class="headerlink" title="ViewHolder"></a>ViewHolder</h2><p>RecyclerView 自身不会创建视图，它创建的是 ViewHolder，而 ViewHolder 引用着一个个<br> itemView，如下图：</p>
+ <center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20201115_rv_holder.png"
+    >
+    <div style="color: #999;">ViewHolder 配合 RecyclerView 用法</div>
+</center>
+
+<p>**RecyclerView 是通过内部类 Recycler 管理的缓存的，图上可以看出通过缓存的是 ViewHolder(内部包含子View)**，这样在滑动时可以复用子 View，某些条件下还可以复用子 View 绑定的数据。</p>
+<p>所以本质上缓存是为了减少重复绘制 View 和绑定数据的时间，从而提高了滑动时的性能。</p>
+<h2 id="四级缓存"><a href="#四级缓存" class="headerlink" title="四级缓存"></a>四级缓存</h2><p><strong>更优秀的是它有四层缓存机制，支持多个离线 ItemView 缓存，支持开发者自定义缓存处理逻辑，支持所有 RecyclerView 共用同一个 RecyclerViewPool(缓存池)。</strong></p>
+<ul>
+<li><strong>mAttachedScrap：</strong>缓存屏幕中可见范围的 ViewHolder。</li>
+<li><strong>mCachedViews：</strong>缓存滑动时即将与 RecyclerView 分离的 ViewHolder，按子 View 的 position 或 id 缓存，默认最多存放2个。</li>
+<li><strong>mViewCacheExtension：</strong>开发者自行实现的缓存。</li>
+<li><strong>mRecyclerPool：</strong>ViewHolder 缓存池，本质上是一个 SparseArray，其中 key 是 ViewType(int类型)，value 存放的是 ArrayList&lt; ViewHolder&gt;，默认每个 ArrayList 中最多存放5个 ViewHolder。</li>
+</ul>
+<center>
+    <img style="border-radius: 0.3125em;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+      src="/images/20201115_rv_cache.png"
+    >
+    <div style="color: #999;">四级缓存</div>
+</center>
+
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>ListView 继承重写 BaseAdapter 类，自定义 ViewHolder 与 convertView 的优化。</p>
+<p>RecyclerView 继承重写 RecyclerView.Adapter 与 RecyclerView.ViewHolder。</p>
+<h2 id="布局效果"><a href="#布局效果" class="headerlink" title="布局效果"></a>布局效果</h2><p>ListView 的布局比较单一，只有一个纵向效果。</p>
+<p>RecyclerView 的布局效果丰富，可以在 LayoutMananger 中设置：线性、表格、瀑布流布局，还可以自定义。</p>
+<h2 id="点击事件"><a href="#点击事件" class="headerlink" title="点击事件"></a>点击事件</h2><p>RecyclerView 不支持 item 点击事件，只能用回调接口来设置点击事。</p>
+<p>ListView 的 item 点击事件直接是 setOnItemClickListener。</p>
+<h2 id="局部刷新"><a href="#局部刷新" class="headerlink" title="局部刷新"></a>局部刷新</h2><p>ListView 中刷新数据通常用 notifyDataSetChanged() ，但这种刷新是全局的，这样会非常消耗资源。</p>
+<p>ListView 实现局部刷新，是可以的，当一个 item 数据刷新时，可以在 Adapter 中，实现 notifyItemChanged()，在方法里面通过这个 item 的 position，刷新这个 item 的数据。</p>
+<p>RecyclerView 中可以实现局部刷新，例如：notifyItemChanged()。</p>
+<h2 id="缓存区别"><a href="#缓存区别" class="headerlink" title="缓存区别"></a>缓存区别</h2><ul>
+<li><strong>层级不同：</strong></li>
+</ul>
+<p><strong>ListView 有两级缓存：</strong>在屏幕与非屏幕内，即 <strong>mActivityViews + mScrapViews</strong>。</p>
+<p><strong>RecyclerView 有四级缓存：</strong>支持开发者自定义缓存处理逻辑，RecyclerViewPool(缓存池)，并且支持多个离屏 ItemView 缓存（缓存屏幕外2个 itemView），即 <strong>mAttachedScrap + mCacheViews + mViewCacheExtension + mRecyclerPool</strong>。</p>
+<ul>
+<li><strong>缓存内容不同：</strong></li>
+</ul>
+<p><strong>ListView 缓存 View。</strong></p>
+<p><strong>RecyclerView 缓存 RecyclerView.ViewHolder。</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/ListView/" rel="tag"># ListView</a>
+              <a href="/tags/RecyclerView/" rel="tag"># RecyclerView</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/06/2020060602_inter-process_communication_android/" rel="prev" title="Android 跨进程通信">
+      <i class="fa fa-chevron-left"></i> Android 跨进程通信
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王雪</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
